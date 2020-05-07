@@ -1,0 +1,34 @@
+.div-banner{
+    position: relative;
+    top: -80px;
+}
+
+.contenedor-banner{
+    height:200px;
+    /*background-color: rgba(148, 157, 233, 1);*/
+    background-image: url('http://104.197.241.81:4200/campo-2.e8360433c98da5d60f9b.jpg');
+    opacity:0.8;
+    background-size: cover;
+}
+
+.banner{
+    margin: 0px 10%;
+    padding-left: 15px;
+}
+
+.contenedor-banner h2{
+    padding-top: 130px;
+    font-size: 20px;
+    font-family: 'Open Sans',sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+
+
+@media (max-width: 768px) {
+    .contenedor-banner h2{display: none;}
+    .contenedor-banner{
+        height: 200px;
+    }
+}

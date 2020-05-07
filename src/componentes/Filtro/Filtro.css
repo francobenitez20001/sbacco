@@ -1,0 +1,9 @@
+.inputFiltro{
+    
+}
+
+@media (max-width: 768px) {
+    .inputFiltro{
+        margin-bottom: 20px;
+    }
+}

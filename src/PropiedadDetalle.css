@@ -1,0 +1,52 @@
+.muestraImagenes{
+    overflow-y: auto;
+    height: 450px;
+}
+
+.muestraImagenes img{
+    height:80px;
+    margin: 0px 10px 10px 0px;
+    width: 80%;
+}
+
+.carousel-propiedad{
+    height: 452px;
+}
+
+.carousel-propiedad .carousel-inner{
+    height: 100%;
+}
+
+.slider-div{
+    height:600px;
+}
+
+
+.colorTitle{color: rgba(196, 28, 66, 1);margin-bottom: 15px !important}
+.descripcionCasa{font-family: 'Open Sans',sans-serif;}
+
+.tituloCaracteristica{font-weight: bold;margin: 0;}
+.tituloPropiedadSeccion{font-size: 35px;font-family: 'Open Sans',sans-serif;}
+#fotoMini{cursor: pointer;}
+.cont-caja{margin-bottom: 40px;}
+
+@media (max-width:768px){
+    .muestraImagenes{
+        height: 110px;
+    }
+    .carousel{
+        height: 250px;
+    }
+    .muestraImagenes img{
+        width: 33%;
+        height: 100%;
+        margin: 0px 0.5px;
+    }
+    .modal-dialog{
+        top:27%;
+    }
+    .tituloPropiedadSeccion{font-size: 25px;margin-top: 20px;}
+    .colorTitle{font-size: 20px!important; margin-bottom: 10px !important;}
+    .cont-caja{margin-bottom: 20px;}
+
+}

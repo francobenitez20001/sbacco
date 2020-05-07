@@ -1,0 +1,10 @@
+.footer{background-color: whitesmoke;}
+.icon-footer{padding: 10px;font-size: 30px;color: #000;}
+
+.info-footer{font-size: 12px;font-weight: bold;font-family: 'Open Sans',sans-serif;}
+
+.copyright{background-color: black;color: white;height:40px;padding-top: 10px;}
+
+@media (max-width: 576px) {
+    .copyright{height: 80px;}
+}

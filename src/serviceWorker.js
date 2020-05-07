@@ -31,6 +31,13 @@ export function register(config) {
       return;
     }
 
+    window.addEventListener('install',event=>{
+      const insertCache = caches.open('sbacco-v1').then(cache=>{
+        return cache.addAll(['/logo.png']);
+      });
+      event.waitUntil(insertCache);
+    })
+
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
@@ -129,13 +136,5 @@ function checkValidServiceWorker(swUrl, config) {
 }
 
 export function unregister() {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready
-      .then(registration => {
-        registration.unregister();
-      })
-      .catch(error => {
-        console.error(error.message);
-      });
-  }
+  
 }

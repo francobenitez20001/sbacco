@@ -1,0 +1,15 @@
+agm-map {
+    height: 300px;
+}
+
+#tituloPropiedadesSeccionn{text-align: center;font-size: 35px;font-family: 'Open Sans',sans-serif;}
+#tituloPropiedadesSeccionn span{color: rgba(196, 28, 66, 1);}
+
+iframe{
+    border: 0px;
+}
+
+@media (max-width: 576px) {
+    #tituloPropiedadesSeccionn{font-size: 24px!important}
+    .example-card{margin-left:0;}
+}

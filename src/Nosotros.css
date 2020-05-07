@@ -1,0 +1,22 @@
+.container-nosotros{
+    position: relative;
+    top: -40px;
+    margin: 0px 10%;
+    padding-left: 15px;
+}
+
+#tituloPropiedadesSeccionNosotros{font-size: 35px;font-family: 'Open Sans',sans-serif;}
+.subrayado-animado{background-color: rgba(196, 28, 66, 1);opacity:0.8; height: 5px;}
+
+@media (max-width: 768px) { 
+    .container-nosotros{
+        top:-40px;
+        padding-left: 0px;
+        margin: 0px 5%;
+        font-size: 14px;
+        font-family: 'Open Sans',sans-serif;
+    }
+
+    #tituloPropiedadesSeccionNosotros{font-size: 25px;}
+
+}

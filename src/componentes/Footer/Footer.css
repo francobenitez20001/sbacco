@@ -1,4 +1,5 @@
 .footer{background-color: whitesmoke;}
+.logo-footer{width: 65%;}
 .icon-footer{padding: 10px;font-size: 30px;color: #000;}
 
 .info-footer{font-size: 12px;font-weight: bold;font-family: 'Open Sans',sans-serif;}
@@ -7,4 +8,8 @@
 
 @media (max-width: 576px) {
     .copyright{height: 80px;}
+}
+
+@media(max-width:768px){
+    .logo-footer{width: 100%;}
 }

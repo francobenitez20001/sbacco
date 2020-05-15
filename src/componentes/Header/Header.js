@@ -48,7 +48,7 @@ const Header = () => {
             </div>
             <nav className="navbar sticky-top navbar-expand-lg">
                 <Link className="navbar-brand logo" to="/">
-                    <img src="http://104.197.241.81:4200/assets/img/logo.png" alt="logo" />
+                    <img src="http://104.197.241.81/imagenes/logo.png" alt="logo" />
                 </Link>
                 <i onClick={toggleMenu} className="fas fa-bars" id="botonMenu"></i>
 

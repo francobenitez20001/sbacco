@@ -43,7 +43,7 @@
 nav{
     background-color: rgba(0,0,5,.315);
     opacity: .9;
-    
+    padding: 0px !important;
     width: 100%;
     z-index: 1000;
 }
@@ -62,8 +62,6 @@ nav{
         background-color:rgba(0, 0, 5, 0.315);
         opacity:0.8; /*Opacidad 60%*/
     }
-    .logo img{height: 100%;
-        width: 100%;}
     .enlaces{display: none;}
     .logo{width: 60%;}
     .container-menu{margin: 0px 0px;padding: 0px;}
@@ -83,6 +81,8 @@ nav{
 
 /* Medium devices (tablets, 768px and up) */
 @media (max-width: 768px) { 
+    .logo img{height: 100%;
+        width: 100%;}
     #botonMenu{display: block; font-size: 30px;float: right;width: 20%; margin-left: 40px;cursor: pointer;}
     .menu li{font-size: 15px;}
     .container-menu{margin: 0px 5%;}

@@ -10,14 +10,14 @@ const Slider = () => {
             </ol>
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img src="http://104.197.241.81:4200/assets/img/banner/campo-2.jpg" className="d-block w-100" alt="..."/>
+                    <img src="http://104.197.241.81/imagenes/campo-2.jpg" className="d-block w-100" alt="..."/>
                     <div className="carousel-caption d-none d-md-block">
                         <h2>Angela Sbacco</h2>
                         <h3>Propiedades</h3>
                     </div>
                 </div>
                 <div className="carousel-item">
-                    <img src="http://104.197.241.81:4200/assets/img/banner/campo-3.jpg" className="d-block w-100" alt="..."/>
+                    <img src="http://104.197.241.81/imagenes/campo-3.jpg" className="d-block w-100" alt="..."/>
                     <div className="carousel-caption d-none d-md-block">
                         <h2>Angela Sbacco</h2>
                         <h3>Propiedades</h3>

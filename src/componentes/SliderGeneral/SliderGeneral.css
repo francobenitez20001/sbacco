@@ -6,7 +6,7 @@
 .contenedor-banner{
     height:200px;
     /*background-color: rgba(148, 157, 233, 1);*/
-    background-image: url('http://104.197.241.81:4200/campo-2.e8360433c98da5d60f9b.jpg');
+    background-image: url('http://104.197.241.81/imagenes/campo-2.jpg');
     opacity:0.8;
     background-size: cover;
 }

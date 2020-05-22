@@ -3,6 +3,8 @@
     color: #fff;
     width: 100%;
     height:50px;
+    display: flex !important;
+    align-items: center;
 }
 .icon-social-menu{
     font-size: 20px;
@@ -53,9 +55,21 @@ nav{
     background-color: white !important;
 }
 
+.redes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media(max-width:1220px){
+    .menu-contacto-info{display: none !important;}
+}
+
 /*Small devices (landscape phones, 576px and up)*/
-@media (max-width: 576px) { 
-    .menu-contacto-info{display: none;}
+
+
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 769px) {
     header{
         top: 20px;
         height: 60px;
@@ -76,11 +90,7 @@ nav{
     }
     .menu-mobile li a:hover{font-weight: bold;}
     #dropdwon-mobile{margin-right: 35px;background-color: black;}
-    #btnCloseMenu{color: white;}
- }
-
-/* Medium devices (tablets, 768px and up) */
-@media (max-width: 768px) { 
+    #btnCloseMenu{color: white;} 
     .logo img{height: 100%;
         width: 100%;}
     #botonMenu{display: block; font-size: 30px;float: right;width: 20%; margin-left: 40px;cursor: pointer;}

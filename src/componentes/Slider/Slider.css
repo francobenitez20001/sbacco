@@ -27,8 +27,15 @@
 .carousel-caption h3{font-size: 35px;}
 .carousel-caption h2,h3{font-family: 'AgencyFb',sans-serif;text-transform: uppercase;}
 
+@media(max-width:1580px){
+    #carouselExampleCaptions{
+        top: -61px;
+    }
+}
 
-@media (max-width: 576px) {
+
+
+@media (max-width: 769px) {
     #carouselExampleCaptions{
         top: -70px;
     }

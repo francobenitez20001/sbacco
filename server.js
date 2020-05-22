@@ -8,5 +8,17 @@ app.use(express.static(path.join(__dirname,'build')));
 app.get("/",(req,res)=>{
     res.sendFile(path.join(__dirname,"build","index.html"));
 });
+app.get("/nosotros",(req,res)=>{
+    console.log(req.url);
+    res.sendFile(path.join(__dirname,"build","index.html"));
+});
+app.get("/contacto",(req,res)=>{
+    console.log(req.url);
+    res.sendFile(path.join(__dirname,"build","index.html"));
+});
+app.get("/propiedades",(req,res)=>{
+    console.log(req.url);
+    res.sendFile(path.join(__dirname,"build","index.html"));
+});
 
-app.listen(9000);
+app.listen(4200);

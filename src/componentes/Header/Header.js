@@ -32,14 +32,14 @@ const Header = () => {
             <div className="menu-contacto-info d-xs-none d-sm-none d-md-block">
                 <div className="container">
                     <div className="row">
-                        <div className="col-9 pt-2">
+                        <div className="col-9">
                             <span className="info-menu-contacto ml-5 mr-4">Oficina central en Parada robles</span>
                             <i className=" ml-4 mr-2 fa fa-phone-alt"></i>
                             <span className="info-menu-contacto">(02323) 478320</span>
                             <i className=" ml-4 mr-2 fab fa-whatsapp"></i>
                             <span className="info-menu-contacto">(011) 5010-5559</span>
                         </div>
-                        <div className="col-3 text-center pt-3">
+                        <div className="col-3 text-center redes">
                             <i className="icon-social-menu fab fa-facebook-f"></i>
                             <i className="icon-social-menu fab fa-instagram"></i>
                         </div>

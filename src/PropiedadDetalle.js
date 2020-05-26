@@ -156,8 +156,6 @@ const PropiedadDetalle = () => {
                     </div>
                 </div>
             </div>
-
-            <Footer/>
         </Fragment>
     );
 }

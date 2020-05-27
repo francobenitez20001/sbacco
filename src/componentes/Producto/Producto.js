@@ -16,9 +16,6 @@ import { Link } from 'react-router-dom';
 import './Producto.css';
 
 const useStyles = makeStyles({
-    root: {
-      maxWidth: 345,
-    },
     media: {
       height: 140,
     },

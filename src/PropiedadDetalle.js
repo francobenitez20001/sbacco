@@ -50,6 +50,7 @@ const PropiedadDetalle = () => {
 
 
     const classes = useStyles();
+    let mensaje = '';
     return (
         <Fragment>
             <SliderGeneral seccion="Propiedad en detalle"/>
@@ -124,20 +125,50 @@ const PropiedadDetalle = () => {
                                             </Typography>
                                             <Typography variant="body2" component="div" className="text-justify descripcionCasa">
                                                 <p className="tituloCaracteristica">Superficie:</p>
-                                                <span className="itemSuperficie">{datos.s_terreno}</span>
+                                                <span className="itemSuperficie"><b>{datos.s_terreno} metros cuadrados</b></span>
                                                 <br/><br/>
                                                 <p className="tituloCaracteristica">Servicios:</p>
-                                                <span className="text-muted">Agua: {datos.agua}</span>
+                                                <span className="text-muted">Agua: 
+                                                    <b>
+                                                        {(datos.agua) ? datos.agua : 'No registrado'}
+                                                    </b>
+                                                </span>
                                                 <br/>
-                                                <span className="text-muted">Luz: {datos.luz}</span>
+                                                <span className="text-muted">Luz: 
+                                                    <b>
+                                                        {(datos.luz) ? datos.luz : 'No registrado'}
+                                                    </b>
+                                                </span>
                                                 <br/>
-                                                <span className="text-muted">Calefacción: {datos.calefaccion}</span>
+                                                <span className="text-muted">Calefacción: 
+                                                    <b>
+                                                        {(datos.calefaccion) ? datos.calefaccion : 'No registrado'}
+                                                    </b>
+                                                </span>
                                                 <br/>
-                                                <span className="text-muted">Dormitorios: {datos.dormitorios}</span>
+                                                <span className="text-muted">Gas: 
+                                                    <b>
+                                                        {(datos.gas) ? datos.gas : 'No registrado'}
+                                                    </b>
+                                                </span>
                                                 <br/>
-                                                <span className="text-muted">Cochera: {datos.cochera}</span>
+                                                <span className="text-muted">Internet: 
+                                                    <b>
+                                                        {(datos.internet) ? datos.internet : 'No registrado'}
+                                                    </b>
+                                                </span>
                                                 <br/>
-                                                <span className="text-muted">Pileta: {datos.pileta}</span>
+                                                <span className="text-muted">Telefono: 
+                                                    <b>
+                                                        {(datos.telefono) ? datos.telefono : 'No registrado'}
+                                                    </b>
+                                                </span>
+                                                <br/>
+                                                <span className="text-muted">Dormitorios: <b>{datos.dormitorios}</b></span>
+                                                <br/>
+                                                <span className="text-muted">Cochera: <b>{datos.cochera}</b></span>
+                                                <br/>
+                                                <span className="text-muted">Pileta: <b>{datos.pileta}</b></span>
                                             </Typography>
                                         </CardContent>
                                     </Card>

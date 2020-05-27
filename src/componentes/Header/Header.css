@@ -97,6 +97,7 @@ nav{
     .menu li{font-size: 15px;}
     .container-menu{margin: 0px 5%;}
     .logo{margin-top:auto}
+    .color-black{color:white !important}
  }
 
 /* Large devices (desktops, 992px and up)*/

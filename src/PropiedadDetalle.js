@@ -129,37 +129,37 @@ const PropiedadDetalle = () => {
                                                 <br/><br/>
                                                 <p className="tituloCaracteristica">Servicios:</p>
                                                 <span className="text-muted">Agua: 
-                                                    <b>
+                                                     <b>
                                                         {(datos.agua) ? datos.agua : 'No registrado'}
                                                     </b>
                                                 </span>
                                                 <br/>
                                                 <span className="text-muted">Luz: 
-                                                    <b>
+                                                     <b>
                                                         {(datos.luz) ? datos.luz : 'No registrado'}
                                                     </b>
                                                 </span>
                                                 <br/>
                                                 <span className="text-muted">Calefacción: 
-                                                    <b>
+                                                     <b>
                                                         {(datos.calefaccion) ? datos.calefaccion : 'No registrado'}
                                                     </b>
                                                 </span>
                                                 <br/>
                                                 <span className="text-muted">Gas: 
-                                                    <b>
+                                                     <b>
                                                         {(datos.gas) ? datos.gas : 'No registrado'}
                                                     </b>
                                                 </span>
                                                 <br/>
                                                 <span className="text-muted">Internet: 
-                                                    <b>
+                                                     <b>
                                                         {(datos.internet) ? datos.internet : 'No registrado'}
                                                     </b>
                                                 </span>
                                                 <br/>
                                                 <span className="text-muted">Telefono: 
-                                                    <b>
+                                                     <b>
                                                         {(datos.telefono) ? datos.telefono : 'No registrado'}
                                                     </b>
                                                 </span>

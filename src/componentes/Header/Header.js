@@ -33,7 +33,7 @@ const Header = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-9">
-                            <span className="info-menu-contacto ml-5 mr-4">Oficina central en Parada robles</span>
+                            <span className="info-menu-contacto ml-5 mr-4">Oficina central en Parada Robles</span>
                             <i className=" ml-4 mr-2 fa fa-phone-alt"></i>
                             <span className="info-menu-contacto">(02323) 478320</span>
                             <i className=" ml-4 mr-2 fab fa-whatsapp"></i>

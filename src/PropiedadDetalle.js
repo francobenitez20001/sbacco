@@ -2,7 +2,6 @@ import React,{Fragment,useEffect,useState} from 'react';
 import { useParams } from "react-router-dom";
 import SliderGeneral from './componentes/SliderGeneral/SliderGeneral';
 import FormContacto from './componentes/FormContacto/FormContacto';
-import Footer from './componentes/Footer/Footer'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';

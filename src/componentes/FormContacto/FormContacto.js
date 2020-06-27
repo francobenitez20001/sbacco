@@ -1,13 +1,9 @@
 import React, {Fragment} from 'react';
 import Error from '../Error/Error';
 import Loader from '../Loader/Loader';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 import TextField from '@material-ui/core/TextField';
 
 import './FormContacto.css';
-
-const MySwal = withReactContent(Swal);
 
 const FormContacto = ({titulo}) => {
 
@@ -42,27 +38,6 @@ const FormContacto = ({titulo}) => {
             setLoader(false);
             console.log(response);
         })
-        // setTimeout(() => {
-        //     setLoader(false);
-        //     MySwal.fire({
-        //         title: <p>Mensaje enviado</p>,
-        //         footer: 'Copyright 2018',
-        //         onOpen: () => {
-        //           MySwal.clickConfirm()
-        //         }
-        //     }).then(() => {
-        //         console.log(mensaje);
-                
-        //         return MySwal.fire(<p>Mensaje enviado</p>)
-        //     });
-        //     setMensaje({
-        //         nombre:'',
-        //         apellido:'',
-        //         email:'',
-        //         telefono:'',
-        //         mensaje:''
-        //     });
-        // }, 3000);
     }
 
 

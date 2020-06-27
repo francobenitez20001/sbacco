@@ -9,6 +9,8 @@
     background-image: url('http://104.197.241.81/imagenes/campo-2.jpg');
     opacity:0.8;
     background-size: cover;
+    position: relative;
+    top: 19px;
 }
 
 .banner{
@@ -24,7 +26,12 @@
     color: #fff;
 }
 
-
+@media(min-width:1441px){
+    .contenedor-banner{
+        position: relative;
+        top: 0px;
+    }
+}
 
 @media (max-width: 768px) {
     .contenedor-banner h2{display: none;}

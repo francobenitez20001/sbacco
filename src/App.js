@@ -11,16 +11,15 @@ import Nosotros from './Nosotros';
 import Contacto from "./Contacto";
 import PropiedadDetalle from './PropiedadDetalle'
 
-
-import Header from './componentes/Header/Header';
 import Footer from './componentes/Footer/Footer';
+
+import Layout from './componentes/Layout';
 
 
 function App() {
   return (
     <Router>
-      <div>
-        <Header/>
+      <Layout>
         <Switch>
           <Route exact path="/"><Home/></Route>
           <Route exact path="/nosotros" component={Nosotros}/>
@@ -29,7 +28,7 @@ function App() {
           <Route exact path="/propiedad/:id" component={PropiedadDetalle}/>
         </Switch>
         <Footer/>
-      </div>
+      </Layout>
     </Router>
   );
 }

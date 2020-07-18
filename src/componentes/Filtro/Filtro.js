@@ -7,8 +7,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import './Filtro.css';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -44,7 +45,8 @@ const Filtro = ({setPropiedades}) => {
         idCategoria:'',
         idOperacion:'',
         precio:'',
-        moneda:''
+        moneda:'',
+        valor:0
     });
 
     const [error, setError] = useState(false);//completar campos
@@ -166,8 +168,21 @@ const Filtro = ({setPropiedades}) => {
                         </FormControl>
                     </div>
                     <div className="col-12 col-sm-4 col-xl-2">
-                        <Button variant="contained" color="secondary" type="submit" className="botonSubmit w-100 mt-3">
+                        <FormControl className={classes.formControl + ' w-100'}>
+                            <TextField id="valor" 
+                                        label="Valor"
+                                        type="number" 
+                                        name="valor"
+                                        value={busqueda.valor}
+                                        onChange={handleChange} />
+                        </FormControl>
+                        {/* <Button variant="contained" color="secondary" type="submit" className="botonSubmit w-100 mt-3">
                             Buscar
+                        </Button> */}
+                    </div>
+                    <div className="col-12 text-center mt-3">
+                        <Button variant="contained" color="secondary" type="submit" className="botonSubmit mt-3">
+                                Buscar
                         </Button>
                     </div>
                 </div>

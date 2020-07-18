@@ -1,11 +1,27 @@
-import React, {Fragment} from 'react';
+import React, {Fragment,useState,useEffect} from 'react';
 import SliderGeneral from './componentes/SliderGeneral/SliderGeneral';
 import Mapa from './componentes/Mapa/Mapa';
+import LoaderFullWidth from './componentes/Loader/LoaderFullWidth';
+import {API} from './config';
 
 import './Nosotros.css';
 
 const Nosotros = () => {
+    const [nosotros, setNosotros] = useState(undefined);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        getData();
+    }, [])
+
+    const getData = ()=>{
+        return fetch(`${API}/nosotros`).then(res=>res.json()).then(res=>{
+            setNosotros(res.data[0]);
+            setLoading(false);
+        })
+    }
+
     return (
+        (loading)?<LoaderFullWidth/>:
         <Fragment>
             <SliderGeneral seccion="Nosotros"/>
             <div className="container-nosotros animated fadeIn fast mt-4">
@@ -13,9 +29,8 @@ const Nosotros = () => {
                     <div className="col-12 col-md-6">
                         <p id="tituloPropiedadesSeccionNosotros">Quiénes sómos</p>
                         <div className="col-12 subrayado-animado"></div>
-                        <p className="descripcion text-justify mt-4">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum cumque modi aliquid qui odit, harum aperiam delectus vel. Adipisci aperiam iure fugiat modi eius possimus recusandae nostrum! Sapiente sit cum numquam nihil architecto totam asperiores ex officia alias! Odit, sunt vel. Veritatis in distinctio aliquid consequuntur reprehenderit? Nam quasi magni, corporis eum cupiditate exercitationem provident magnam saepe accusamus unde atque necessitatibus rerum veniam sapiente a labore obcaecati nobis in at quos quod recusandae voluptas dolore. Illo vero esse doloribus. Quaerat minima a quod repellendus similique ab perspiciatis voluptatibus molestias harum optio, dolorum laborum. Qui iure error nulla quod ut repellat.
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum cumque modi aliquid qui odit, harum aperiam delectus vel. Adipisci aperiam iure fugiat modi eius possimus recusandae nostrum! Sapiente sit cum numquam nihil architecto totam asperiores ex officia alias! Odit, sunt vel. Veritatis in distinctio aliquid consequuntur reprehenderit? Nam quasi magni, corporis eum cupiditate exercitationem provident magnam saepe accusamus unde atque necessitatibus rerum veniam sapiente a labore obcaecati nobis in at quos quod recusandae voluptas dolore. Illo vero esse doloribus. Quaerat minima a quod repellendus similique ab perspiciatis voluptatibus molestias harum optio, dolorum laborum. Qui iure error nulla quod ut repellat.
+                        <p className="descripcion text-justify mt-4" style={{whiteSpace:'pre-line'}}>
+                            {nosotros.contenido}
                         </p>
                     </div>
                     <div className="col-12 col-md-6">

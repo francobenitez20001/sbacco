@@ -1,5 +1,7 @@
-import React,{Fragment} from 'react';
+import React,{Fragment,useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import LoaderFullWidth from '../Loader/LoaderFullWidth';
+import {API} from '../../config';
 import './Header.css';
 
 const toggleMenu = ()=>{
@@ -27,7 +29,22 @@ window.onscroll = ()=>{
 
 
 const Header = () => {
+    const [contacto, setContacto] = useState(undefined);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        getData();
+    }, [])
+
+    const getData = ()=>{
+        return fetch(`${API}/contacto`).then(res=>res.json()).then(res=>{
+            setContacto(res.data[0]);
+            setLoading(false);
+        })
+    }
+    
     return (
+        (loading)?<LoaderFullWidth/>:
         <Fragment>
             <div className="menu-contacto-info d-xs-none d-sm-none d-md-block">
                 <div className="container">
@@ -35,13 +52,17 @@ const Header = () => {
                         <div className="col-9">
                             <span className="info-menu-contacto ml-5 mr-4">Oficina central en Parada Robles</span>
                             <i className=" ml-4 mr-2 fa fa-phone-alt"></i>
-                            <span className="info-menu-contacto">(02323) 478320</span>
+                            <span className="info-menu-contacto">{contacto.telefonoPrincipal}</span>
                             <i className=" ml-4 mr-2 fab fa-whatsapp"></i>
-                            <span className="info-menu-contacto">(011) 5010-5559</span>
+                            <span className="info-menu-contacto">{contacto.whatsapp}</span>
                         </div>
                         <div className="col-3 text-center redes">
-                            <i className="icon-social-menu fab fa-facebook-f"></i>
-                            <i className="icon-social-menu fab fa-instagram"></i>
+                            <a target="blank" style={{color:'white'}} href={contacto.facebook}>
+                                <i className="icon-social-menu fab fa-facebook-f"></i>
+                            </a>
+                            <a target="blank" style={{color:'white'}} href={contacto.instagram}>
+                                <i className="icon-social-menu fab fa-instagram"></i>
+                            </a>
                         </div>
                     </div>
                 </div>

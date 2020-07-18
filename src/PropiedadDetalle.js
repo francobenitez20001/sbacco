@@ -69,11 +69,11 @@ const PropiedadDetalle = () => {
                                 {imagenes.map(img=>(
                                     (img.header === 1) ? 
                                         <div key={img.id} className="carousel-item active">
-                                            <img className="d-block w-100 img-fluid" src={`http://104.197.241.81/imagenes/${img.nombre}`} alt="First slide"/>
+                                            <img className="d-block w-100 img-fluid" src={`${img.nombre}`} alt="First slide"/>
                                         </div>
                                     :
                                         <div key={img.id} className="carousel-item">
-                                            <img className="d-block w-100 img-fluid" src={`http://104.197.241.81/imagenes/${img.nombre}`} alt="Second slide"/>
+                                            <img className="d-block w-100 img-fluid" src={`${img.nombre}`} alt="Second slide"/>
                                         </div>
                                 ))}
                             </div>
@@ -89,7 +89,7 @@ const PropiedadDetalle = () => {
                     </div>
                     <div className="col-12 col-md-2 muestraImagenes">
                         {imagenes.map(img=>(
-                            <img key={img.id} onClick={handleClickImagenIndividual} data-toggle="modal" data-target=".bd-example-modal-lg" src={`http://104.197.241.81/imagenes/${img.nombre}`} className="img-fluid mb-2" alt="casa"/>
+                            <img key={img.id} onClick={handleClickImagenIndividual} data-toggle="modal" data-target=".bd-example-modal-lg" src={`${img.nombre}`} className="img-fluid mb-2" alt="casa"/>
                         ))}
                     </div>
                 </div>
@@ -182,7 +182,7 @@ const PropiedadDetalle = () => {
             <div className="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg">
                     <div className="modal-content">
-                        <img src="http://104.197.241.81/imagenes/casa.jpg" name="img-modal" className="img-fluid" alt="casa"/>
+                        <img src="" name="img-modal" className="img-fluid" alt="casa"/>
                     </div>
                 </div>
             </div>

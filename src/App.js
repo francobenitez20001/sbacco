@@ -11,8 +11,6 @@ import Nosotros from './Nosotros';
 import Contacto from "./Contacto";
 import PropiedadDetalle from './PropiedadDetalle'
 
-import Footer from './componentes/Footer/Footer';
-
 import Layout from './componentes/Layout';
 
 
@@ -27,7 +25,6 @@ function App() {
           <Route exact path="/contacto" component={Contacto}/>
           <Route exact path="/propiedad/:id" component={PropiedadDetalle}/>
         </Switch>
-        <Footer/>
       </Layout>
     </Router>
   );

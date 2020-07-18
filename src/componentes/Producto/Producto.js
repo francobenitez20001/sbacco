@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 
 const Producto = ({propiedad}) => {
     const classes = useStyles();
-    let imagen = `http://104.197.241.81/imagenes/${propiedad.header}`;
+    let imagen = `${propiedad.header}`;
     let descripcion = propiedad.descripcion;
     if (descripcion.length>490) {
         descripcion = propiedad.descripcion.substr(0,490)+'...';

@@ -2,7 +2,6 @@ import React,{Fragment,useEffect,useState} from 'react';
 import { useParams } from "react-router-dom";
 import SliderGeneral from './componentes/SliderGeneral/SliderGeneral';
 import FormContacto from './componentes/FormContacto/FormContacto';
-import Footer from './componentes/Footer/Footer'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -50,6 +49,7 @@ const PropiedadDetalle = () => {
 
 
     const classes = useStyles();
+    let mensaje = '';
     return (
         <Fragment>
             <SliderGeneral seccion="Propiedad en detalle"/>
@@ -69,11 +69,11 @@ const PropiedadDetalle = () => {
                                 {imagenes.map(img=>(
                                     (img.header === 1) ? 
                                         <div key={img.id} className="carousel-item active">
-                                            <img className="d-block w-100 img-fluid" src={`http://104.197.241.81/imagenes/${img.nombre}`} alt="First slide"/>
+                                            <img className="d-block w-100 img-fluid" src={`${img.nombre}`} alt="First slide"/>
                                         </div>
                                     :
                                         <div key={img.id} className="carousel-item">
-                                            <img className="d-block w-100 img-fluid" src={`http://104.197.241.81/imagenes/${img.nombre}`} alt="Second slide"/>
+                                            <img className="d-block w-100 img-fluid" src={`${img.nombre}`} alt="Second slide"/>
                                         </div>
                                 ))}
                             </div>
@@ -89,7 +89,7 @@ const PropiedadDetalle = () => {
                     </div>
                     <div className="col-12 col-md-2 muestraImagenes">
                         {imagenes.map(img=>(
-                            <img key={img.id} onClick={handleClickImagenIndividual} data-toggle="modal" data-target=".bd-example-modal-lg" src={`http://104.197.241.81/imagenes/${img.nombre}`} className="img-fluid mb-2" alt="casa"/>
+                            <img key={img.id} onClick={handleClickImagenIndividual} data-toggle="modal" data-target=".bd-example-modal-lg" src={`${img.nombre}`} className="img-fluid mb-2" alt="casa"/>
                         ))}
                     </div>
                 </div>
@@ -124,20 +124,50 @@ const PropiedadDetalle = () => {
                                             </Typography>
                                             <Typography variant="body2" component="div" className="text-justify descripcionCasa">
                                                 <p className="tituloCaracteristica">Superficie:</p>
-                                                <span className="itemSuperficie">{datos.s_terreno}</span>
+                                                <span className="itemSuperficie"><b>{datos.s_terreno} metros cuadrados</b></span>
                                                 <br/><br/>
                                                 <p className="tituloCaracteristica">Servicios:</p>
-                                                <span className="text-muted">Agua: {datos.agua}</span>
+                                                <span className="text-muted">Agua: 
+                                                     <b>
+                                                        {(datos.agua) ? datos.agua : 'No registrado'}
+                                                    </b>
+                                                </span>
                                                 <br/>
-                                                <span className="text-muted">Luz: {datos.luz}</span>
+                                                <span className="text-muted">Luz: 
+                                                     <b>
+                                                        {(datos.luz) ? datos.luz : 'No registrado'}
+                                                    </b>
+                                                </span>
                                                 <br/>
-                                                <span className="text-muted">Calefacción: {datos.calefaccion}</span>
+                                                <span className="text-muted">Calefacción: 
+                                                     <b>
+                                                        {(datos.calefaccion) ? datos.calefaccion : 'No registrado'}
+                                                    </b>
+                                                </span>
                                                 <br/>
-                                                <span className="text-muted">Dormitorios: {datos.dormitorios}</span>
+                                                <span className="text-muted">Gas: 
+                                                     <b>
+                                                        {(datos.gas) ? datos.gas : 'No registrado'}
+                                                    </b>
+                                                </span>
                                                 <br/>
-                                                <span className="text-muted">Cochera: {datos.cochera}</span>
+                                                <span className="text-muted">Internet: 
+                                                     <b>
+                                                        {(datos.internet) ? datos.internet : 'No registrado'}
+                                                    </b>
+                                                </span>
                                                 <br/>
-                                                <span className="text-muted">Pileta: {datos.pileta}</span>
+                                                <span className="text-muted">Telefono: 
+                                                     <b>
+                                                        {(datos.telefono) ? datos.telefono : 'No registrado'}
+                                                    </b>
+                                                </span>
+                                                <br/>
+                                                <span className="text-muted">Dormitorios: <b>{datos.dormitorios}</b></span>
+                                                <br/>
+                                                <span className="text-muted">Cochera: <b>{datos.cochera}</b></span>
+                                                <br/>
+                                                <span className="text-muted">Pileta: <b>{datos.pileta}</b></span>
                                             </Typography>
                                         </CardContent>
                                     </Card>
@@ -152,12 +182,10 @@ const PropiedadDetalle = () => {
             <div className="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-lg">
                     <div className="modal-content">
-                        <img src="http://104.197.241.81/imagenes/casa.jpg" name="img-modal" className="img-fluid" alt="casa"/>
+                        <img src="" name="img-modal" className="img-fluid" alt="casa"/>
                     </div>
                 </div>
             </div>
-
-            <Footer/>
         </Fragment>
     );
 }

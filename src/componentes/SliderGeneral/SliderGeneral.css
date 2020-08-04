@@ -6,9 +6,11 @@
 .contenedor-banner{
     height:200px;
     /*background-color: rgba(148, 157, 233, 1);*/
-    background-image: url('http://104.197.241.81:4200/campo-2.e8360433c98da5d60f9b.jpg');
+    background-image: url('http://104.197.241.81/imagenes/campo-2.jpg');
     opacity:0.8;
     background-size: cover;
+    position: relative;
+    top: 19px;
 }
 
 .banner{
@@ -24,7 +26,16 @@
     color: #fff;
 }
 
-
+@media(min-width:1441px){
+    .contenedor-banner{
+        position: relative;
+        top: 0px;
+    }
+    .div-banner{
+        position: relative;
+        top: -62px;
+    }
+}
 
 @media (max-width: 768px) {
     .contenedor-banner h2{display: none;}

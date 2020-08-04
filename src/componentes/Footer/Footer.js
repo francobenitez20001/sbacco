@@ -1,22 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import {API} from '../../config';
 import './Footer.css';
 
 const Footer = () => {
+    const [contacto, setContacto] = useState(undefined);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        getContacto();
+    }, [])
+    const getContacto = async()=>{
+        return fetch(`${API}/contacto`).then(res=>res.json()).then(data=>{
+            setContacto(data.data[0]);
+            setLoading(false);
+        });
+    }
     return (
-        <div>
+        (loading)?null:
+        <div className="contenedor-footer">
             <div className="footer">
                 <div className="container-fluid">
-                    <div className="row">
+                    <div className="row align-items-center">
                         <div className="col-12 col-md-4 mt-1">
-                            <img src="http://104.197.241.81:4200/assets/img/logo.png" alt="logo" className="logo-footer img-fluid"/>
+                            <img src="http://104.197.241.81/imagenes/logo.png" alt="logo" className="logo-footer img-fluid"/>
                         </div>
-                        <div className="col-12 col-md-4 text-center mt-4">
-                            <i className=" ml-4 mr-2 fa fa-phone-alt icon-footer material-icons mt-3"></i>
-                            <p className="info-footer mt-2">011-15-5010-5559</p>
+                        <div className="col-12 col-md-4 text-center">
+                            <i className="fa fa-phone-alt icon-footer material-icons mt-3"></i>
+                            <p className="info-footer mt-2">{contacto.telefonoPrincipal}</p>
                         </div>
-                        <div className="col-12 col-md-4 text-center mt-4">
+                        <div className="col-12 col-md-4 text-center">
                             <i className="fas fa-map-marker-alt material-icons icon-footer mt-3"></i>
-                            <p className="info-footer mt-2">Ruta Provincial 192 y Calle 25 de Mayo, Parada Robles</p>
+                            <p className="info-footer mt-2">{contacto.direccion}</p>
                         </div>
                     </div>
                 </div>

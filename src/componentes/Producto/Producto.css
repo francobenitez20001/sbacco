@@ -1,23 +1,19 @@
 #txtDimension{
     position: relative;
-    left:30%;
     font-size: 14px;
 }
 
 .btnCard{
-    color:rgba(196, 28, 66, 1)!important;
+    color:rgba(131, 1, 75, 1)!important;
 }
 
 .avatar{
-    background-color:rgba(196, 28, 66, 1)!important;
+    background-color:rgba(131, 1, 75, 1)!important;
 }
 
-.w-100Producto{
-    
-}
 
-.producto{
-        
+.card-actions{
+    justify-content: space-between;
 }
 
 @media (max-width: 768px) { 
@@ -29,7 +25,6 @@
         margin-bottom: 30px;
     }
     #txtDimension{
-        left:40%;
         font-size: 13px;
     }
 }

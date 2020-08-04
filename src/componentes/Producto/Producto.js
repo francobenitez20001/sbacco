@@ -16,9 +16,6 @@ import { Link } from 'react-router-dom';
 import './Producto.css';
 
 const useStyles = makeStyles({
-    root: {
-      maxWidth: 345,
-    },
     media: {
       height: 140,
     },
@@ -29,13 +26,13 @@ const useStyles = makeStyles({
 
 const Producto = ({propiedad}) => {
     const classes = useStyles();
-    let imagen = `http://104.197.241.81/imagenes/${propiedad.header}`;
+    let imagen = `${propiedad.header}`;
     let descripcion = propiedad.descripcion;
     if (descripcion.length>490) {
         descripcion = propiedad.descripcion.substr(0,490)+'...';
     }
     return (
-        <Card className={classes.root + ' w-100Producto producto'}>
+        <Card className={classes.root}>
             <CardHeader
                 avatar={
                 <Avatar aria-label="recipe" className="avatar">
@@ -60,7 +57,7 @@ const Producto = ({propiedad}) => {
                 </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
+            <CardActions className="card-actions">
                 <Link to={{pathname: `/propiedad/${propiedad.id}`}}>
                     <Button size="small" className="btnCard">
                         Ver Más

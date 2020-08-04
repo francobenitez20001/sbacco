@@ -1,13 +1,9 @@
 import React, {Fragment} from 'react';
 import Error from '../Error/Error';
 import Loader from '../Loader/Loader';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 import TextField from '@material-ui/core/TextField';
 
 import './FormContacto.css';
-
-const MySwal = withReactContent(Swal);
 
 const FormContacto = ({titulo}) => {
 
@@ -15,7 +11,7 @@ const FormContacto = ({titulo}) => {
         nombre:'',
         apellido:'',
         email:'',
-        celular:'',
+        telefono:'',
         mensaje:''
     });
     const [error, setError] = React.useState(false);
@@ -29,31 +25,19 @@ const FormContacto = ({titulo}) => {
 
     const handleSubmit = event=>{
         event.preventDefault();
-        if (mensaje.nombre.trim() === '' || mensaje.apellido.trim() === '' || mensaje.email.trim() === '' || mensaje.celular.trim() === '' || mensaje.mensaje.trim() === '') {
+        if (mensaje.nombre.trim() === '' || mensaje.apellido.trim() === '' || mensaje.email.trim() === '' || mensaje.telefono.trim() === '' || mensaje.mensaje.trim() === '') {
             setError(true);
             return;
         }
         setError(false);
         setLoader(true);
-        setTimeout(() => {
+        fetch('http://xrargentina.org/backend/enviar.php',{
+            method:'POST',
+            body:JSON.stringify(mensaje)
+        }).then(res=>res.json()).then(response=>{
             setLoader(false);
-            MySwal.fire({
-                title: <p>Mensaje enviado</p>,
-                footer: 'Copyright 2018',
-                onOpen: () => {
-                  MySwal.clickConfirm()
-                }
-            }).then(() => {
-                return MySwal.fire(<p>Mensaje enviado</p>)
-            });
-            setMensaje({
-                nombre:'',
-                apellido:'',
-                email:'',
-                celular:'',
-                mensaje:''
-            });
-        }, 3000);
+            console.log(response);
+        })
     }
 
 
@@ -78,7 +62,7 @@ const FormContacto = ({titulo}) => {
                         <TextField id="standard-basic" onChange={handleChange} value={mensaje.email} name="email" className="w-100" label="Email" />
                     </div>
                     <div className="col-12 col-md-6 my-2">
-                        <TextField id="standard-basic" onChange={handleChange} value={mensaje.celular} name="celular" className="w-100" label="Celular" />
+                        <TextField id="standard-basic" onChange={handleChange} value={mensaje.telefono} name="telefono" className="w-100" label="Celular" />
                     </div>
                     <div className="col-12">
                         <TextField id="standard-basic" onChange={handleChange} value={mensaje.mensaje} name="mensaje" className="w-100" label="Mensaje" />

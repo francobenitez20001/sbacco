@@ -6,21 +6,27 @@ import Producto from './componentes/Producto/Producto';
 import Filtro from './componentes/Filtro/Filtro';
 import FormContacto from './componentes/FormContacto/FormContacto';
 import Mapa from './componentes/Mapa/Mapa';
-
+import LoaderFullWidth from './componentes/Loader/LoaderFullWidth';
+import Footer from './componentes/Footer/Footer';
+import {API} from './config';
 
 const Home = () => {
-    const [propiedades, setPropiedades] = useState([]);
+    const [propiedades, setPropiedades] = useState(undefined);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-      const getData = ()=>{
-        fetch('http://104.197.241.81:3000/listar_inmuebles/6/normal').then(res=>res.json()).then(propiedadess=>{
-            setPropiedades(propiedadess.data);
-        });
-      }
-      getData();      
+        getPropiedades();      
     },[]);
+    
+    const getPropiedades = async()=>{
+        return fetch(`${API}/listar_inmuebles/6/normal`).then(res=>res.json()).then(propiedadess=>{
+            setPropiedades(propiedadess.data);
+            setLoading(false);
+        });
+    }
 
     return (
+        (loading)?<LoaderFullWidth/>:
         <div className="App">
             <Slider/>
             <div className="container">
@@ -47,6 +53,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

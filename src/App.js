@@ -12,6 +12,7 @@ import Contacto from "./Contacto";
 import PropiedadDetalle from './PropiedadDetalle'
 
 import Layout from './componentes/Layout';
+import NotFound from './componentes/NotFound/NotFound';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/propiedades" component={Propiedades}/>
           <Route exact path="/contacto" component={Contacto}/>
           <Route exact path="/propiedad/:id" component={PropiedadDetalle}/>
+          <Route component={NotFound}/>
         </Switch>
       </Layout>
     </Router>

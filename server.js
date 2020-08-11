@@ -27,6 +27,8 @@ app.get("/propiedades",(req,res)=>{
 app.get("/propiedad/:id",(req,res)=>{
     res.sendFile(path.join(__dirname,"build","index.html"));
 });
-
+app.use(function(req, res, next) {
+    res.sendFile(path.join(__dirname,"build","index.html"));
+});
 
 app.listen(4200);

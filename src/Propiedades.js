@@ -30,12 +30,13 @@ const Propiedades = () => {
             <div className="container">
                 <div className="row">
                     {
+                        (propiedades)?
                         propiedades.map(propiedad=>(
                             <div key={propiedad.id} className="col-12 col-md-4 mb-3">
                                 <Producto
                                     propiedad={propiedad}/>
                             </div>
-                        ))
+                        )):<div className="alert alert-warning text-center col-12">Sin propiedades</div>
                     }
                 </div>
             </div>

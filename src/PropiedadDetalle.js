@@ -163,11 +163,15 @@ const PropiedadDetalle = () => {
                                                     </b>
                                                 </span>
                                                 <br/>
-                                                <span className="text-muted">Dormitorios: <b>{datos.dormitorios}</b></span>
-                                                <br/>
-                                                <span className="text-muted">Cochera: <b>{datos.cochera}</b></span>
-                                                <br/>
-                                                <span className="text-muted">Pileta: <b>{datos.pileta}</b></span>
+                                                {(datos.idCategoria==3)?null:
+                                                <>
+                                                    <span className="text-muted">Dormitorios: <b>{datos.dormitorios}</b></span>
+                                                    <br/>
+                                                    <span className="text-muted">Cochera: <b>{datos.cochera}</b></span>
+                                                    <br/>
+                                                    <span className="text-muted">Pileta: <b>{datos.pileta}</b></span>
+                                                </>
+                                                }
                                             </Typography>
                                         </CardContent>
                                     </Card>

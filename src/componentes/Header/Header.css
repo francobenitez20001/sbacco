@@ -38,6 +38,7 @@
     overflow-y: hidden !important;
     z-index: 1000;
     background-color: white;
+    box-shadow: 0 -1px 8px -2px rgba(2,2,2,.2), 0 0px 1px 0 rgba(3,3,3,.14), 0 1px 3px 0 rgba(0,0,0,0.12);
 }
 
 nav{

@@ -10,17 +10,37 @@
 }
 
 .carousel-propiedad{
-    height: 452px;
+    /* height: 452px; */
 }
 
-.carousel-propiedad .carousel-inner{
-    height: 100%;
-}
 
 .slider-div{
     height:600px;
 }
 
+.carousel-propiedad .carousel-item img {
+    max-height: 100% !important;
+}
+
+.carousel-propiedad .carousel-item{height: 400px;}
+
+.carousel-propiedad .carousel-inner{
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    border-radius: 5px;
+}
+
+.carousel-propiedad .carousel-item.active{  
+    float: none;
+    width: auto;
+    margin-right: 0px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: -webkit-transform .6s ease-in-out;
+    transition: transform .6s ease-in-out;
+    transition: transform .6s ease-in-out,-webkit-transform .6s ease-in-out;
+}
 
 .colorTitle{color: rgba(131, 1, 75, 1);margin-bottom: 15px !important}
 .descripcionCasa{font-family: 'Open Sans',sans-serif;}
@@ -43,10 +63,14 @@
         margin: 0px 0.5px;
     }
     .modal-dialog{
-        top:27%;
+        top:5%;
     }
     .tituloPropiedadSeccion{font-size: 25px;margin-top: 20px;}
     .colorTitle{font-size: 20px!important; margin-bottom: 10px !important;}
     .cont-caja{margin-bottom: 20px;}
+
+    .carousel-propiedad .carousel-control-prev, .carousel-propiedad .carousel-control-next{
+        color: black!important;
+    }
 
 }

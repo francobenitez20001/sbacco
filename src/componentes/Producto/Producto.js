@@ -21,18 +21,23 @@ const useStyles = makeStyles({
     },
     avatar: {
         backgroundColor: red[500],
-    },
+    }
   });
 
 const Producto = ({propiedad}) => {
     const classes = useStyles();
     let imagen = `${propiedad.header}`;
     let descripcion = propiedad.descripcion;
-    if (descripcion.length>490) {
-        descripcion = propiedad.descripcion.substr(0,490)+'...';
+    if (descripcion.length>300) {
+        descripcion = propiedad.descripcion.substr(0,296)+'...';
     }
+    
+    const verPropiedad = id=>{
+        window.location.assign(`/propiedad/${id}`);
+    }
+    
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} onClick={()=>verPropiedad(propiedad.id)}>
             <CardHeader
                 avatar={
                 <Avatar aria-label="recipe" className="avatar">

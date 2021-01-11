@@ -110,7 +110,7 @@ const PropiedadDetalle = () => {
                                             <Typography variant="h5" component="div" className="colorTitle">
                                                 {datos.categoria} - {datos.localidad}
                                             </Typography>
-                                            <Typography variant="body2" component="div" className="text-justify descripcionCasa">
+                                            <Typography variant="body2" component="div" style={{whiteSpace:`pre-line`}} className="text-justify descripcionCasa">
                                                 {datos.descripcion}
                                             </Typography>
                                         </CardContent>

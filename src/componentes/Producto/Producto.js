@@ -45,8 +45,9 @@ const Producto = ({propiedad}) => {
                 </Avatar>
                 }
                 title={propiedad.partido}
-                subheader={propiedad.localidad}
+                subheader={propiedad.localidad}  
             />
+            {(propiedad.mostrarEstado=='no')?null:<span className="labelEstado">{propiedad.estado}</span>}
             <CardActionArea>
                 <CardMedia
                 className={classes.media}

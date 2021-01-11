@@ -16,6 +16,17 @@
     justify-content: space-between;
 }
 
+.labelEstado{
+    position: absolute;
+    right: 15px;
+    background-color: rgb(27, 27, 27);
+    top: 10px;
+    color: white;
+    font-size: 11px;
+    padding: 5px;
+    opacity: 0.9;
+}
+
 @media (max-width: 768px) { 
     .w-100Producto{
         max-width: 100% !important;

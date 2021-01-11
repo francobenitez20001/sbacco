@@ -69,11 +69,11 @@ const PropiedadDetalle = () => {
                                 {imagenes.map(img=>(
                                     (img.header === 1) ? 
                                         <div key={img.id} className="carousel-item active">
-                                            <img className="d-block w-100 img-fluid" src={`${img.nombre}`} alt="First slide"/>
+                                            <img className="" src={`${img.nombre}`} alt="First slide"/>
                                         </div>
                                     :
                                         <div key={img.id} className="carousel-item">
-                                            <img className="d-block w-100 img-fluid" src={`${img.nombre}`} alt="Second slide"/>
+                                            <img className="" src={`${img.nombre}`} alt="Second slide"/>
                                         </div>
                                 ))}
                             </div>
@@ -97,7 +97,7 @@ const PropiedadDetalle = () => {
 
                 {/* descripcion */}
                 
-                <div className="row mt-4">
+                <div className="row mt-5">
                     <div className="col-12">
                         {propiedad.map(datos=>(
                             <div key={datos.id} className="row">
@@ -163,11 +163,15 @@ const PropiedadDetalle = () => {
                                                     </b>
                                                 </span>
                                                 <br/>
-                                                <span className="text-muted">Dormitorios: <b>{datos.dormitorios}</b></span>
-                                                <br/>
-                                                <span className="text-muted">Cochera: <b>{datos.cochera}</b></span>
-                                                <br/>
-                                                <span className="text-muted">Pileta: <b>{datos.pileta}</b></span>
+                                                {(datos.idCategoria==3)?null:
+                                                <>
+                                                    <span className="text-muted">Dormitorios: <b>{datos.dormitorios}</b></span>
+                                                    <br/>
+                                                    <span className="text-muted">Cochera: <b>{datos.cochera}</b></span>
+                                                    <br/>
+                                                    <span className="text-muted">Pileta: <b>{datos.pileta}</b></span>
+                                                </>
+                                                }
                                             </Typography>
                                         </CardContent>
                                     </Card>

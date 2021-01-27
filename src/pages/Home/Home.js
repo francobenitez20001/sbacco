@@ -1,16 +1,16 @@
 import React,{useEffect,useState} from 'react';
-import './App.css';
+import '../../App.css';
+import {connect} from 'react-redux';
+import Slider from '../../componentes/Slider/Slider'
+import Producto from '../../componentes/Producto/Producto';
+import Filtro from '../../componentes/Filtro/Filtro';
+import FormContacto from '../../componentes/FormContacto/FormContacto';
+import Mapa from '../../componentes/Mapa/Mapa';
+import LoaderFullWidth from '../../componentes/Loader/LoaderFullWidth';
+import Footer from '../../componentes/Footer/Footer';
+import {API} from '../../config';
 
-import Slider from './componentes/Slider/Slider'
-import Producto from './componentes/Producto/Producto';
-import Filtro from './componentes/Filtro/Filtro';
-import FormContacto from './componentes/FormContacto/FormContacto';
-import Mapa from './componentes/Mapa/Mapa';
-import LoaderFullWidth from './componentes/Loader/LoaderFullWidth';
-import Footer from './componentes/Footer/Footer';
-import {API} from './config';
-
-const Home = () => {
+const Home = (props) => {
     const [propiedades, setPropiedades] = useState(undefined);
     const [loading, setLoading] = useState(true);
 
@@ -24,7 +24,7 @@ const Home = () => {
             setLoading(false);
         });
     }
-
+    console.log(props);
     return (
         (loading)?<LoaderFullWidth/>:
         <div className="App">
@@ -58,5 +58,6 @@ const Home = () => {
         </div>
     );
 }
- 
-export default Home;
+
+const mapStateToProps = ({generalReducer})=>generalReducer;
+export default connect(mapStateToProps,{})(Home);

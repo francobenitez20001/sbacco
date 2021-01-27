@@ -1,8 +1,8 @@
 import React, {Fragment,useState,useEffect} from 'react';
-import SliderGeneral from './componentes/SliderGeneral/SliderGeneral';
-import Mapa from './componentes/Mapa/Mapa';
-import LoaderFullWidth from './componentes/Loader/LoaderFullWidth';
-import {API} from './config';
+import SliderGeneral from '../../componentes/SliderGeneral/SliderGeneral';
+import Mapa from '../../componentes/Mapa/Mapa';
+import LoaderFullWidth from '../../componentes/Loader/LoaderFullWidth';
+import {API} from '../../config';
 
 import './Nosotros.css';
 

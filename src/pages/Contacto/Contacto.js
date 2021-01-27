@@ -1,7 +1,7 @@
 import React,{Fragment, useEffect} from 'react';
-import SliderGeneral from './componentes/SliderGeneral/SliderGeneral';
-import FormContacto from './componentes/FormContacto/FormContacto';
-import {API} from './config';
+import SliderGeneral from '../../componentes/SliderGeneral/SliderGeneral';
+import FormContacto from '../../componentes/FormContacto/FormContacto';
+import {API} from '../../config';
 
 import './Contacto.css';
 const Contacto = () => {

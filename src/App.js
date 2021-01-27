@@ -5,11 +5,11 @@ import {
   Route
 } from "react-router-dom";
 
-import Home from './Home';
-import Propiedades from './Propiedades';
-import Nosotros from './Nosotros';
-import Contacto from "./Contacto";
-import PropiedadDetalle from './PropiedadDetalle'
+import Home from './pages/Home/Home.js';
+import Propiedades from './pages/Propiedades/Propiedades.js';
+import Nosotros from './pages/Nosotros/Nosotros';
+import Contacto from "./pages/Contacto/Contacto";
+import PropiedadDetalle from './pages/Propiedad/PropiedadDetalle'
 
 import Layout from './componentes/Layout';
 import NotFound from './componentes/NotFound/NotFound';

@@ -1,10 +1,10 @@
 import React, {Fragment, useState, useEffect} from 'react';
-import SliderGeneral from './componentes/SliderGeneral/SliderGeneral';
-import Producto from './componentes/Producto/Producto';
-import Filtro from './componentes/Filtro/Filtro';
-import Footer from './componentes/Footer/Footer';
-import {API} from './config';
-import LoaderFullWidth from './componentes/Loader/LoaderFullWidth';
+import SliderGeneral from '../../componentes/SliderGeneral/SliderGeneral';
+import Producto from '../../componentes/Producto/Producto';
+import Filtro from '../../componentes/Filtro/Filtro';
+import Footer from '../../componentes/Footer/Footer';
+import {API} from '../../config';
+import LoaderFullWidth from '../../componentes/Loader/LoaderFullWidth';
 import './Propiedades.css';
 
 const Propiedades = () => {

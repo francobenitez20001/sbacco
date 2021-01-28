@@ -1,19 +1,19 @@
 import {LOADING,ERROR,OBTENER_UBICACIONES} from '../types/ubicacionesTypes';
 import {API} from '../config';
 
-export const getCategorias = disaptch=>async()=>{
-    disaptch({
+export const getUbicaciones = ()=>async(dispatch)=>{
+    dispatch({
         type:LOADING
     });
     try {
-        const reqUbicaciones = await fetch(`${API}/categorias`);
+        const reqUbicaciones = await fetch(`${API}/ubicaciones`);
         const dataUbicaciones = await reqUbicaciones.json();
-        return disaptch({
+        return dispatch({
             type:OBTENER_UBICACIONES,
             payload:dataUbicaciones.data
         })
     } catch (error) {
-        disaptch({
+        dispatch({
             type:ERROR,
             payload:error.message
         })

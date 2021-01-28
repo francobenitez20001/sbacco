@@ -1,4 +1,4 @@
-import {LOADING,ERROR,AGREGAR} from '../types/categorias';
+import {LOADING,ERROR,OBTENER_CATEGORIAS} from '../types/categorias';
 
 const INITIAL_STATE = {
     categorias:[],

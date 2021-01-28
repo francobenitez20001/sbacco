@@ -1,6 +1,10 @@
 import React,{useEffect,useState} from 'react';
 import '../../App.css';
 import {connect} from 'react-redux';
+import * as propiedadesActions from '../../actions/propiedadesActions.js';
+import * as categoriasActions from '../../actions/categoriasActions.js';
+import * as ubicacionesActions from '../../actions/ubicacionesActions.js';
+import * as operacionesActions from '../../actions/operacionesActions.js';
 import Slider from '../../componentes/Slider/Slider'
 import Producto from '../../componentes/Producto/Producto';
 import Filtro from '../../componentes/Filtro/Filtro';
@@ -8,42 +12,44 @@ import FormContacto from '../../componentes/FormContacto/FormContacto';
 import Mapa from '../../componentes/Mapa/Mapa';
 import LoaderFullWidth from '../../componentes/Loader/LoaderFullWidth';
 import Footer from '../../componentes/Footer/Footer';
-import {API} from '../../config';
+import Propiedades from '../../componentes/Propiedades';
+
+const {getCategorias} = categoriasActions;
+const {getOperaciones} = operacionesActions;
+const {getPropiedades} = propiedadesActions;
+const {getUbicaciones} = ubicacionesActions;
 
 const Home = (props) => {
-    const [propiedades, setPropiedades] = useState(undefined);
-    const [loading, setLoading] = useState(true);
+    const {categorias} = props.categoriasReducer;
+    const {operaciones} = props.operacionesReducer;
+    const {propiedades} = props.propiedadesReducer;
+    const {ubicaciones} = props.ubicacionesReducer;
 
     useEffect(() => {
-        getPropiedades();      
-    },[]);
-    
-    const getPropiedades = async()=>{
-        return fetch(`${API}/listar_inmuebles/6/normal`).then(res=>res.json()).then(propiedadess=>{
-            setPropiedades(propiedadess.data);
-            setLoading(false);
-        });
-    }
+        if(categorias.length==0){
+            props.getCategorias();
+        }
+        if(operaciones.length==0){
+            props.getOperaciones();
+        }
+        if(propiedades.length==0){
+            props.getPropiedades();
+        }
+        if(ubicaciones.length==0){
+            props.getUbicaciones();
+        }
+    }, [])
+
     console.log(props);
     return (
-        (loading)?<LoaderFullWidth/>:
+        (categorias.length==0 || operaciones.length==0 || propiedades.length==0 || ubicaciones.length == 0)?<LoaderFullWidth/>:
         <div className="App">
             <Slider/>
             <div className="container">
                 <h2 id="tituloPropiedadesSeccion" className="mb-4">Ultimas <span>Propiedades</span></h2>
-                <div className="row">
-                    {
-                        (propiedades)?
-                        propiedades.map(propiedad=>(
-                            <div key={propiedad.id} className="col-12 col-md-4 mb-3">
-                                <Producto
-                                    propiedad={propiedad}/>
-                            </div>
-                        )):<div className="alert alert-warning text-center col-12">Sin propiedades</div>
-                    }
-                </div>
+                <Propiedades/>
             </div>
-            <Filtro setPropiedades={setPropiedades}/>
+            {/* <Filtro setPropiedades={setPropiedades}/>
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-12 col-md-7">
@@ -53,11 +59,21 @@ const Home = (props) => {
                     <FormContacto/>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <Footer/>
         </div>
     );
 }
 
-const mapStateToProps = ({generalReducer})=>generalReducer;
-export default connect(mapStateToProps,{})(Home);
+const mapStateToProps = ({categoriasReducer,operacionesReducer,propiedadesReducer,ubicacionesReducer})=>{
+    return {categoriasReducer,operacionesReducer,propiedadesReducer,ubicacionesReducer}
+};
+
+const mapDispatchToProps = {
+    getCategorias,
+    getOperaciones,
+    getPropiedades,
+    getUbicaciones
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home);

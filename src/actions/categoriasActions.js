@@ -1,19 +1,19 @@
 import {LOADING,ERROR,OBTENER_CATEGORIAS} from '../types/categorias';
 import {API} from '../config';
 
-export const getCategorias = disaptch=>async()=>{
-    disaptch({
+export const getCategorias = ()=>async(dispatch)=>{
+    dispatch({
         type:LOADING
     });
     try {
         const reqCategorias = await fetch(`${API}/categorias`);
         const dataCategorias = await reqCategorias.json();
-        return disaptch({
+        return dispatch({
             type:OBTENER_CATEGORIAS,
             payload:dataCategorias.data
         })
     } catch (error) {
-        disaptch({
+        dispatch({
             type:ERROR,
             payload:error.message
         })

@@ -1,7 +1,15 @@
 import {combineReducers} from 'redux';
-import generalReducer from './general';
+import categoriasReducer from './categorias';
+import operacionesReducer from './operaciones';
+import propiedadesReducer from './propiedades';
+import ubicacionesReducer from './ubicaciones';
+import contactoReducer from './contacto';
 
 export default combineReducers({
     //aca van todos los reducers que voy a tener en la app
-    generalReducer
+    categoriasReducer,
+    operacionesReducer,
+    propiedadesReducer,
+    ubicacionesReducer,
+    contactoReducer
 });

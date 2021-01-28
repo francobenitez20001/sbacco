@@ -1,7 +1,8 @@
 import React,{Fragment,useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import LoaderFullWidth from '../Loader/LoaderFullWidth';
-import {API} from '../../config';
+import {connect} from 'react-redux';
+import * as contactoActions from '../../actions/contactoActions';
 import './Header.css';
 
 const toggleMenu = ()=>{
@@ -30,23 +31,20 @@ window.onscroll = ()=>{
 }
 
 
-const Header = () => {
-    const [contacto, setContacto] = useState(undefined);
-    const [loading, setLoading] = useState(true);
+const Header = (props) => {
 
     useEffect(() => {
         getData();
     }, [])
 
     const getData = ()=>{
-        return fetch(`${API}/contacto`).then(res=>res.json()).then(res=>{
-            setContacto(res.data[0]);
-            setLoading(false);
-        })
+        if(!props.info){
+            props.getInfo();
+        }
     }
     
     return (
-        (loading)?<LoaderFullWidth/>:
+        (!props.info)?<LoaderFullWidth/>:
         <Fragment>
             <div className="menu-contacto-info d-xs-none d-sm-none d-md-block">
                 <div className="container">
@@ -54,15 +52,15 @@ const Header = () => {
                         <div className="col-9">
                             <span className="info-menu-contacto ml-5 mr-4">Oficina central en Parada Robles</span>
                             <i className=" ml-4 mr-2 fa fa-phone-alt"></i>
-                            <span className="info-menu-contacto">{contacto.telefonoPrincipal}</span>
+                            <span className="info-menu-contacto">{props.info.telefonoPrincipal}</span>
                             <i className=" ml-4 mr-2 fab fa-whatsapp"></i>
-                            <span className="info-menu-contacto">{contacto.whatsapp}</span>
+                            <span className="info-menu-contacto">{props.info.whatsapp}</span>
                         </div>
                         <div className="col-3 text-center redes">
-                            <a target="blank" style={{color:'white'}} href={contacto.facebook}>
+                            <a target="blank" style={{color:'white'}} href={props.info.facebook}>
                                 <i className="icon-social-menu fab fa-facebook-f"></i>
                             </a>
-                            <a target="blank" style={{color:'white'}} href={contacto.instagram}>
+                            <a target="blank" style={{color:'white'}} href={props.info.instagram}>
                                 <i className="icon-social-menu fab fa-instagram"></i>
                             </a>
                         </div>
@@ -95,5 +93,7 @@ const Header = () => {
         </Fragment>
     );
 }
+
+const mapStateToProps = ({contactoReducer})=>contactoReducer;
  
-export default Header;
+export default connect(mapStateToProps,contactoActions)(Header);

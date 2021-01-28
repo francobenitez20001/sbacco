@@ -6,7 +6,7 @@ const LoaderFullWidth = () => {
     return (
         <div id="LoaderFullWidth">
             <CircularProgress color="secondary" className="loader-full" />
-            <p className="text-center">Obteniendo resultados...</p>
+            <p className="text-center">Cargando...</p>
         </div>
     );
 }

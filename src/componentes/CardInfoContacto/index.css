@@ -1,0 +1,30 @@
+.infoContacto{
+    background-color: #83014b;
+    height: 100%;
+    color: white !important;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.infoContacto .item-red{
+    margin: 50px 0px;
+    width: 100%;
+}
+
+.infoContacto .item-red .icon-red{
+    font-size: 40px;
+}
+
+.infoContacto .item-red .redNombre a, .redNombre{
+    color: white;
+    font-size: 16px;
+}
+
+.__withBorder{
+    border-bottom: solid 1px white;
+}
+
+.infoContacto .item-red .redNombre a:hover{text-decoration: none;}

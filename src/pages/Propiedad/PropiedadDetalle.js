@@ -9,6 +9,7 @@ import './PropiedadDetalle.css';
 import CarouselProductos from '../../componentes/CarouselProductos';
 import CardDescripcion from '../../componentes/CardDescripcionPropiedad/cardDescripcion';
 import CardServicios from '../../componentes/CardDescripcionPropiedad/cardServicios';
+import Footer  from '../../componentes/Footer/Footer'
 
 const PropiedadDetalle = (props) => {
     // console.log(id);
@@ -27,7 +28,7 @@ const PropiedadDetalle = (props) => {
         (props.loading || !propiedad || !imagenes)?<LoaderFullWidth/>:
         <Fragment>
             <SliderGeneral seccion="Propiedad en detalle"/>
-            <div className="container mb-5">
+            <div className="container my-5">
                 <div className="row">
                     <div className="col-12 col-md-10">
                         <CarouselProductos imagenes={imagenes}/>
@@ -64,6 +65,7 @@ const PropiedadDetalle = (props) => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </Fragment>
     );
 }

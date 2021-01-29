@@ -24,3 +24,13 @@
     display: flex;
     justify-content: space-between;
 }
+
+@media(max-width:768px){
+    .contenedor-banner{
+        height: 160px;
+    }
+    .contenedor-banner h2{
+        font-size: 15px;
+    }
+    .paginacion{font-size: 13px !important;}
+}

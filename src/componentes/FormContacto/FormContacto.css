@@ -1,7 +1,9 @@
-.botonEnviar{
+form .botonEnviar{
     background-color: rgba(131, 1, 75, 1);width: 100%;color: #fff;margin-top: 15px;
+    margin: 8px;
 }
-.botonEnviar:hover{
+
+form .botonEnviar:hover{
     color: #fff;
     box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
 }
@@ -9,4 +11,22 @@
 .MuiButton-containedSecondary {
     color: #fff;
     background-color: rgba(131, 1, 75, 1)!important;
+}
+
+form .__withBorderLeft{
+    border-left: solid 1px #83014b;
+}
+
+@media(max-width:768px){
+    .MuiFormControl-fullWidth {
+        width: 100%;
+        margin: 10px 0px !important;
+    }
+
+    form .botonEnviar{
+        margin: 10px 2px;
+    }
+    form .__withBorderLeft{
+        border: none;
+    }
 }

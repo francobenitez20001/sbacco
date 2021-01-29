@@ -9,7 +9,7 @@ const PropiedadesPage = () => {
     return (
         <Fragment>
             <SliderGeneral seccion="Propiedades"/>
-            <div className="container">
+            <div className="container my-3">
                 <Propiedades/>
             </div>
             <Filtro/>

@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Error from '../Error/Error'
 import LoaderFullWidth from '../Loader/LoaderFullWidth';
-
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -11,7 +10,19 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {connect} from 'react-redux';
+import * as operacionesActions from '../../actions/operacionesActions';
+import * as ubicacionesActions from '../../actions/ubicacionesActions';
+import * as categoriasActions from '../../actions/categoriasActions';
+import * as propiedadesActions from '../../actions/propiedadesActions';
+import Loader from '../Loader/Loader';
+import Swal from 'sweetalert2';
 import './Filtro.css';
+
+const {getCategorias} = categoriasActions;
+const {getOperaciones} = operacionesActions;
+const {getUbicaciones} = ubicacionesActions;
+const {filtrarPropiedades} = propiedadesActions;
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -22,23 +33,24 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
   
-const Filtro = ({setPropiedades}) => {
+const Filtro = (props) => {
     const classes = useStyles();
-    const [operaciones, setOperaciones] = useState([]);
-    const [categorias, setCategorias] = useState([]);
-    const [localidades, setLocalidades] = useState([]);
     const [check, setCheck] = useState(false);
+    const [error, setError] = useState(false);
     useEffect(() => {
         const getData = ()=>{
-            fetch('http://104.197.241.81:3000/operaciones').then(res=>res.json()).then(operaciones=>{
-                setOperaciones(operaciones.data);
-            });
-            fetch('http://104.197.241.81:3000/ubicaciones').then(res=>res.json()).then(ubicaciones=>{
-                setLocalidades(ubicaciones.data);
-            });
-            fetch('http://104.197.241.81:3000/categorias').then(res=>res.json()).then(categorias=>{
-                setCategorias(categorias.data);
-            });
+            const {operaciones} = props.operacionesReducer;
+            const {categorias} = props.categoriasReducer;
+            const {ubicaciones} = props.ubicacionesReducer;
+            if(categorias.length===0){
+                props.getCategorias();
+            }
+            if(operaciones.length===0){
+                props.getOperaciones();
+            }
+            if(ubicaciones.length===0){
+                props.getUbicaciones();
+            }
         }
         getData();
     }, [])
@@ -56,10 +68,6 @@ const Filtro = ({setPropiedades}) => {
         minPrecio:0,
         maxPrecio:0
     });
-
-    const [error, setError] = useState(false);//completar campos
-    const [sinPropiedad, setSinPropiedad] = useState(false);
-    const [loader, setLoader] = useState(false);
   
     const handleChange = event => {
       setBusqueda({
@@ -75,22 +83,11 @@ const Filtro = ({setPropiedades}) => {
             return;
         }
         setError(false);
-        setSinPropiedad(false);
-        setLoader(true);
-        document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
-        let query = `http://104.197.241.81:3000/filtrar_todo/${busqueda.idLocalidad}/${busqueda.idCategoria}/${busqueda.idOperacion}/${busqueda.precio}/${busqueda.moneda}`;
         if(check){
-            query += `?minPrecio=${rango.minPrecio}&maxPrecio=${rango.maxPrecio}`;
+            props.filtrarPropiedades(busqueda,rango)
+        }else{
+            props.filtrarPropiedades(busqueda,null);
         }
-        fetch(query).then(res=>res.json()).then(response=>{
-            setLoader(false);
-            document.getElementsByTagName('body')[0].style.overflowY='visible';
-            if(!response.data){
-                setSinPropiedad(true);
-                return;
-            };
-            setPropiedades(response.data);
-        })
     }
 
     const handleChangeCheck = event=>{
@@ -106,12 +103,22 @@ const Filtro = ({setPropiedades}) => {
             [event.target.name]:event.target.value
         })
     }
+    const {operaciones} = props.operacionesReducer;
+    const {categorias} = props.categoriasReducer;
+    const {ubicaciones} = props.ubicacionesReducer;
 
     return (
-        <div className="container-fluid my-4 jumbotron">
-            {loader?<LoaderFullWidth/>:null}
-            {error ? <Error mensaje="Completa todos los campos"/> : null}
-            {sinPropiedad ? <Error mensaje="No se encontraron resultados con la busqueda"/> : null}
+        <div className="container-fluid jumbotron">
+            {(error) ? <Error mensaje="Completa todos los campos"/> : null}
+            {(props.propiedadesReducer.loading)?<LoaderFullWidth/>:null}
+            {(props.propiedadesReducer.error)?
+                Swal.fire(
+                    'Ups..',
+                    props.propiedadesReducer.error,
+                    'error'
+                )
+            :null}
+            {(operaciones.length===0 || categorias.length===0 || ubicaciones.length===0)?<Loader/>:
             <form className="col-12" onSubmit={handleSubmit}>
                 <div className="row">
                     <div className="col-12 col-sm-4 col-xl-2 inputFiltro">
@@ -157,7 +164,7 @@ const Filtro = ({setPropiedades}) => {
                                 value={busqueda.idLocalidad}
                                 onChange={handleChange}
                             >
-                                {localidades.map(localidad=>(
+                                {ubicaciones.map(localidad=>(
                                     <MenuItem key={localidad.id} value={localidad.id}>{localidad.localidad}</MenuItem>
                                 ))}
                             </Select>
@@ -230,8 +237,20 @@ const Filtro = ({setPropiedades}) => {
                     </div>
                 </div>
             </form>
+            }
         </div>
     );
 }
+
+const mapStateToProps = ({categoriasReducer,operacionesReducer,ubicacionesReducer,propiedadesReducer})=>{
+    return {categoriasReducer,operacionesReducer,ubicacionesReducer,propiedadesReducer}
+};
+
+const mapDispatchToProps = {
+    getCategorias,
+    getOperaciones,
+    getUbicaciones,
+    filtrarPropiedades
+};
  
-export default Filtro;
+export default connect(mapStateToProps,mapDispatchToProps)(Filtro);

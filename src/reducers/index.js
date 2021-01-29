@@ -4,6 +4,7 @@ import operacionesReducer from './operaciones';
 import propiedadesReducer from './propiedades';
 import ubicacionesReducer from './ubicaciones';
 import contactoReducer from './contacto';
+import nosotrosReducer from './nosotros';
 
 export default combineReducers({
     //aca van todos los reducers que voy a tener en la app
@@ -11,5 +12,6 @@ export default combineReducers({
     operacionesReducer,
     propiedadesReducer,
     ubicacionesReducer,
-    contactoReducer
+    contactoReducer,
+    nosotrosReducer
 });

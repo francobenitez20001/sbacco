@@ -10,17 +10,18 @@ const Propiedades = (props) => {
             props.getPropiedades();
         }
     }, []);
-    
     return (
         <div className="row">
             {
-                (props.propiedades.length>0)?
+                (props.propiedades.length===0 || !props.propiedades)?
+                <div className="alert alert-warning text-center col-12">Sin propiedades</div>
+                :
                 props.propiedades.map(propiedad=>(
                     <div key={propiedad.id} className="col-12 col-md-4 mb-3">
                         <Producto
                             propiedad={propiedad}/>
                     </div>
-                )):<div className="alert alert-warning text-center col-12">Sin propiedades</div>
+                ))
             }
         </div>
     );

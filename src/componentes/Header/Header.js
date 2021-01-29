@@ -8,25 +8,28 @@ import './Header.css';
 const toggleMenu = ()=>{
     document.getElementById('navbarSupportedContent').classList.toggle('showw');
 }
-
-window.onscroll = ()=>{
-    var scroll = document.documentElement.scrollTop || document.body.scrollTop;
-
-    // Realizamos alguna accion cuando el scroll sea mayor a 100
-    if (scroll>100) {
-        if(document.getElementsByClassName('navbar')[0]){
-            document.getElementsByClassName('navbar')[0].classList.add('scroll');
-            for(let i = 0; i<document.getElementsByClassName('nav-link').length;i++){
-                document.getElementsByClassName('nav-link')[i].classList.add('color-black');
+if(window){
+    window.onscroll = ()=>{
+        var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+    
+        // Realizamos alguna accion cuando el scroll sea mayor a 100
+        if (scroll>100) {
+            if(document.getElementsByClassName('navbar')[0]){
+                document.getElementsByClassName('navbar')[0].classList.add('scroll');
+                for(let i = 0; i<document.getElementsByClassName('nav-link').length;i++){
+                    document.getElementsByClassName('nav-link')[i].classList.add('color-black');
+                }
+                document.getElementById('botonMenu').style.color='#c41c42';
             }
-            document.getElementById('botonMenu').style.color='#c41c42';
+        }else{
+            for(let i = 0; i<document.getElementsByClassName('nav-link').length;i++){
+                document.getElementsByClassName('nav-link')[i].classList.remove('color-black');
+            }
+            if(document.getElementById('botonMenu') && document.getElementsByClassName('navbar')[0]){
+                document.getElementById('botonMenu').style.color='black';
+                document.getElementsByClassName('navbar')[0].classList.remove('scroll');
+            }
         }
-    }else{
-        for(let i = 0; i<document.getElementsByClassName('nav-link').length;i++){
-            document.getElementsByClassName('nav-link')[i].classList.remove('color-black');
-        }
-        document.getElementById('botonMenu').style.color='black';
-        document.getElementsByClassName('navbar')[0].classList.remove('scroll');
     }
 }
 

@@ -30,7 +30,7 @@ export const getPropiedad = (id)=>async(dispatch)=>{
         if(dataPropiedad.length<1) return dispatch({type:ERROR,payload:'No existe propiedad'});
         return dispatch({
             type:VER_PROPIEDAD,
-            payload:dataPropiedad.data[0]
+            payload:dataPropiedad
         })
     } catch (error) {
         dispatch({
@@ -40,20 +40,26 @@ export const getPropiedad = (id)=>async(dispatch)=>{
     }
 }
 
-export const filtrarPropiedades = (params)=>async (dispatch)=>{
+export const filtrarPropiedades = (params,rangoPrecio)=>async (dispatch)=>{
     dispatch({
         type:LOADING
     });
     try {
         let query = `${API}/filtrar_todo/${params.idLocalidad}/${params.idCategoria}/${params.idOperacion}/${params.precio}/${params.moneda}`;
-        if(params.minPrecio && params.maxPrecio){
-            query += `?minPrecio=${params.minPrecio}&maxPrecio=${params.maxPrecio}`
+        if(rangoPrecio){
+            query += `?minPrecio=${rangoPrecio.minPrecio}&maxPrecio=${rangoPrecio.maxPrecio}`
         }
         const reqPropiedad = await fetch(query);
         const dataPropiedad = await reqPropiedad.json();
+        if(!dataPropiedad.status){
+            return dispatch({
+                type:ERROR,
+                payload:dataPropiedad.info.code
+            })
+        }
         return dispatch({
             type:OBTENER_PROPIEDADES,
-            payload:dataPropiedad.data[0]
+            payload:dataPropiedad.data
         })
     } catch (error) {
         dispatch({

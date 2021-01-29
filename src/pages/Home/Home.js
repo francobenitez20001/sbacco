@@ -1,12 +1,11 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect} from 'react';
 import '../../App.css';
 import {connect} from 'react-redux';
 import * as propiedadesActions from '../../actions/propiedadesActions.js';
 import * as categoriasActions from '../../actions/categoriasActions.js';
 import * as ubicacionesActions from '../../actions/ubicacionesActions.js';
 import * as operacionesActions from '../../actions/operacionesActions.js';
-import Slider from '../../componentes/Slider/Slider'
-import Producto from '../../componentes/Producto/Producto';
+import Slider from '../../componentes/Slider/Slider';
 import Filtro from '../../componentes/Filtro/Filtro';
 import FormContacto from '../../componentes/FormContacto/FormContacto';
 import Mapa from '../../componentes/Mapa/Mapa';
@@ -40,16 +39,16 @@ const Home = (props) => {
         }
     }, [])
 
-    console.log(props);
     return (
-        (categorias.length==0 || operaciones.length==0 || propiedades.length==0 || ubicaciones.length == 0)?<LoaderFullWidth/>:
+        (categorias.length==0 || operaciones.length==0 || ubicaciones.length == 0)?<LoaderFullWidth/>:
         <div className="App">
             <Slider/>
+            <Filtro/>
             <div className="container">
-                <h2 id="tituloPropiedadesSeccion" className="mb-4">Ultimas <span>Propiedades</span></h2>
+                <h2 id="tituloPropiedadesSeccion" className="mb-4">Últimas <span>Propiedades</span></h2>
                 <Propiedades/>
             </div>
-            {/* <Filtro setPropiedades={setPropiedades}/>
+            <hr/>
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-12 col-md-7">
@@ -59,7 +58,7 @@ const Home = (props) => {
                     <FormContacto/>
                     </div>
                 </div>
-            </div> */}
+            </div>
             <Footer/>
         </div>
     );

@@ -1,12 +1,14 @@
-import React,{Fragment,useEffect,useState} from 'react';
+import React,{Fragment,useEffect} from 'react';
 import { useParams } from "react-router-dom";
 import SliderGeneral from '../../componentes/SliderGeneral/SliderGeneral';
 import FormContacto from '../../componentes/FormContacto/FormContacto';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import {connect} from 'react-redux';
+import * as propiedadesActions from '../../actions/propiedadesActions';
+import LoaderFullWidth from '../../componentes/Loader/LoaderFullWidth';
 import './PropiedadDetalle.css';
 
 const useStyles = makeStyles({
@@ -26,21 +28,12 @@ const useStyles = makeStyles({
     },
 });
 
-const PropiedadDetalle = () => {
-
-    const [propiedad, setPropiedad] = useState([]);
-    const [imagenes, setImagenes] = useState([]);
-    let { id } = useParams();
+const PropiedadDetalle = (props) => {
     // console.log(id);
-
+    let { id } = useParams();
+    
     useEffect(() => {
-        const getData = ()=>{
-            fetch(`http://104.197.241.81:3000/detallar_inmueble_id/${id}`).then(res=>res.json()).then(data=>{
-                setPropiedad(data.data);
-                setImagenes(data.imagenes);
-            })
-        }
-        getData();
+        props.getPropiedad(id);
     }, [])
 
     const handleClickImagenIndividual = event =>{
@@ -49,8 +42,9 @@ const PropiedadDetalle = () => {
 
 
     const classes = useStyles();
-    let mensaje = '';
+    const {data:propiedad,imagenes} = props.propiedad;
     return (
+        (props.loading || !propiedad || !imagenes)?<LoaderFullWidth/>:
         <Fragment>
             <SliderGeneral seccion="Propiedad en detalle"/>
             <div className="container mb-5">
@@ -99,85 +93,83 @@ const PropiedadDetalle = () => {
                 
                 <div className="row mt-5">
                     <div className="col-12">
-                        {propiedad.map(datos=>(
-                            <div key={datos.id} className="row">
-                                <div className="col-12 col-md-8 cont-caja">
-                                    <Card className={classes.root}>
-                                        <CardContent>
-                                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                                {datos.operacion}
-                                            </Typography>
-                                            <Typography variant="h5" component="div" className="colorTitle">
-                                                {datos.categoria} - {datos.localidad}
-                                            </Typography>
-                                            <Typography variant="body2" component="div" style={{whiteSpace:`pre-line`}} className="text-justify descripcionCasa">
-                                                {datos.descripcion}
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </div>
-                                <div className="col-12 col-md-4 cont-caja">
-                                    <Card className={classes.root}>
-                                        <CardContent>
-                                            <Typography variant="h5" component="div" className="precioCasa colorTitle">
-                                                U$S {datos.precio}
-                                            </Typography>
-                                            <Typography variant="body2" component="div" className="text-justify descripcionCasa">
-                                                <p className="tituloCaracteristica">Superficie:</p>
-                                                <span className="itemSuperficie"><b>{datos.s_terreno} metros cuadrados</b></span>
-                                                <br/><br/>
-                                                <p className="tituloCaracteristica">Servicios:</p>
-                                                <span className="text-muted">Agua: 
-                                                     <b>
-                                                        {(datos.agua) ? datos.agua : 'No registrado'}
-                                                    </b>
-                                                </span>
-                                                <br/>
-                                                <span className="text-muted">Luz: 
-                                                     <b>
-                                                        {(datos.luz) ? datos.luz : 'No registrado'}
-                                                    </b>
-                                                </span>
-                                                <br/>
-                                                <span className="text-muted">Calefacción: 
-                                                     <b>
-                                                        {(datos.calefaccion) ? datos.calefaccion : 'No registrado'}
-                                                    </b>
-                                                </span>
-                                                <br/>
-                                                <span className="text-muted">Gas: 
-                                                     <b>
-                                                        {(datos.gas) ? datos.gas : 'No registrado'}
-                                                    </b>
-                                                </span>
-                                                <br/>
-                                                <span className="text-muted">Internet: 
-                                                     <b>
-                                                        {(datos.internet) ? datos.internet : 'No registrado'}
-                                                    </b>
-                                                </span>
-                                                <br/>
-                                                <span className="text-muted">Telefono: 
-                                                     <b>
-                                                        {(datos.telefono) ? datos.telefono : 'No registrado'}
-                                                    </b>
-                                                </span>
-                                                <br/>
-                                                {(datos.idCategoria==3)?null:
-                                                <>
-                                                    <span className="text-muted">Dormitorios: <b>{datos.dormitorios}</b></span>
-                                                    <br/>
-                                                    <span className="text-muted">Cochera: <b>{datos.cochera}</b></span>
-                                                    <br/>
-                                                    <span className="text-muted">Pileta: <b>{datos.pileta}</b></span>
-                                                </>
-                                                }
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </div>
+                        <div key={propiedad.id} className="row">
+                            <div className="col-12 col-md-8 cont-caja">
+                                <Card className={classes.root}>
+                                    <CardContent>
+                                        <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                            {propiedad.operacion}
+                                        </Typography>
+                                        <Typography variant="h5" component="div" className="colorTitle">
+                                            {propiedad.categoria} - {propiedad.localidad}
+                                        </Typography>
+                                        <Typography variant="body2" component="div" style={{whiteSpace:`pre-line`}} className="text-justify descripcionCasa">
+                                            {propiedad.descripcion}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
                             </div>
-                        ))}
+                            <div className="col-12 col-md-4 cont-caja">
+                                <Card className={classes.root}>
+                                    <CardContent>
+                                        <Typography variant="h5" component="div" className="precioCasa colorTitle">
+                                            U$S {propiedad.precio}
+                                        </Typography>
+                                        <Typography variant="body2" component="div" className="text-justify descripcionCasa">
+                                            <p className="tituloCaracteristica">Superficie:</p>
+                                            <span className="itemSuperficie"><b>{propiedad.s_terreno} metros cuadrados</b></span>
+                                            <br/><br/>
+                                            <p className="tituloCaracteristica">Servicios:</p>
+                                            <span className="text-muted">Agua: 
+                                                 <b>
+                                                    {(propiedad.agua) ? propiedad.agua : 'No registrado'}
+                                                </b>
+                                            </span>
+                                            <br/>
+                                            <span className="text-muted">Luz: 
+                                                 <b>
+                                                    {(propiedad.luz) ? propiedad.luz : 'No registrado'}
+                                                </b>
+                                            </span>
+                                            <br/>
+                                            <span className="text-muted">Calefacción: 
+                                                 <b>
+                                                    {(propiedad.calefaccion) ? propiedad.calefaccion : 'No registrado'}
+                                                </b>
+                                            </span>
+                                            <br/>
+                                            <span className="text-muted">Gas: 
+                                                 <b>
+                                                    {(propiedad.gas) ? propiedad.gas : 'No registrado'}
+                                                </b>
+                                            </span>
+                                            <br/>
+                                            <span className="text-muted">Internet: 
+                                                 <b>
+                                                    {(propiedad.internet) ? propiedad.internet : 'No registrado'}
+                                                </b>
+                                            </span>
+                                            <br/>
+                                            <span className="text-muted">Telefono: 
+                                                 <b>
+                                                    {(propiedad.telefono) ? propiedad.telefono : 'No registrado'}
+                                                </b>
+                                            </span>
+                                            <br/>
+                                            {(propiedad.idCategoria==3)?null:
+                                            <>
+                                                <span className="text-muted">Dormitorios: <b>{propiedad.dormitorios}</b></span>
+                                                <br/>
+                                                <span className="text-muted">Cochera: <b>{propiedad.cochera}</b></span>
+                                                <br/>
+                                                <span className="text-muted">Pileta: <b>{propiedad.pileta}</b></span>
+                                            </>
+                                            }
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <FormContacto titulo="Consultar por esta propiedad"/>
@@ -194,4 +186,6 @@ const PropiedadDetalle = () => {
     );
 }
  
-export default PropiedadDetalle;
+const mapStateToProps = ({propiedadesReducer})=>propiedadesReducer;
+
+export default connect(mapStateToProps,propiedadesActions)(PropiedadDetalle);

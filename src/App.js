@@ -6,8 +6,8 @@ import {
 } from "react-router-dom";
 
 import Home from './pages/Home/Home.js';
-import Propiedades from './pages/Propiedades/Propiedades.js';
 import Nosotros from './pages/Nosotros/Nosotros';
+import PropiedadesPage from './pages/Propiedades/Propiedades.js';
 import Contacto from "./pages/Contacto/Contacto";
 import PropiedadDetalle from './pages/Propiedad/PropiedadDetalle'
 
@@ -22,7 +22,7 @@ function App() {
         <Switch>
           <Route exact path="/"><Home/></Route>
           <Route exact path="/nosotros" component={Nosotros}/>
-          <Route exact path="/propiedades" component={Propiedades}/>
+          <Route exact path="/propiedades" component={PropiedadesPage}/>
           <Route exact path="/contacto" component={Contacto}/>
           <Route exact path="/propiedad/:id" component={PropiedadDetalle}/>
           <Route component={NotFound}/>

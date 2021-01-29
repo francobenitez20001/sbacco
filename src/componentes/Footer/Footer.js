@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {connect} from 'react-redux';
+import * as contactoActions from '../../actions/contactoActions';
 import './Footer.css';
 
 const Footer = (props) => {
-
+    useEffect(() => {
+        if(!props.info){
+            props.getInfo();
+        }
+    }, [])
     return (
+        (!props.info)?null:
         <div className="contenedor-footer">
             <div className="footer">
                 <div className="container-fluid">
@@ -34,4 +40,4 @@ const Footer = (props) => {
  
 const mapStateToProps = ({contactoReducer})=>contactoReducer;
  
-export default connect(mapStateToProps,{})(Footer);
+export default connect(mapStateToProps,contactoActions)(Footer);

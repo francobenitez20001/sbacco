@@ -12,7 +12,7 @@ export default (state=INITIAL_STATE,action)=>{
         case OBTENER_PROPIEDADES:
             return {...state,loading:false,error:null,propiedades:action.payload}
         case VER_PROPIEDAD:
-            return {...state,loading:false,error:null,propiedad:action.payload}
+            return {...state,loading:false,error:null,propiedad:{data:action.payload.data[0],imagenes:action.payload.imagenes}}
         case LOADING:
             return{...state,loading:true}
         case ERROR:

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../pages/Propiedad/PropiedadDetalle.css';
 const CarouselProductos = ({imagenes}) => {
     return (
         <div id="carouselExampleIndicators" className="carousel slide carousel-propiedad" data-ride="carousel">

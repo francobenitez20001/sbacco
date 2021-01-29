@@ -49,15 +49,8 @@ const Home = (props) => {
                 <Propiedades/>
             </div>
             <hr/>
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-12 col-md-7">
-                    <Mapa/>
-                    </div>
-                    <div className="col-12 col-md-5">
-                    <FormContacto/>
-                    </div>
-                </div>
+            <div className="container">
+                <Mapa/>
             </div>
             <Footer/>
         </div>

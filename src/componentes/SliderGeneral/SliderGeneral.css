@@ -1,45 +1,26 @@
-.div-banner{
-    position: relative;
-    top: -80px;
-}
-
 .contenedor-banner{
-    height:200px;
-    /*background-color: rgba(148, 157, 233, 1);*/
-    background-image: url('http://104.197.241.81/imagenes/campo-2.jpg');
-    opacity:0.99;
+    height:250px;
+    background-image: url('https://images.unsplash.com/photo-1592201533860-87499b95a239?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-position: bottom;
+    display: flex;
     background-size: cover;
-    position: relative;
-    top: 19px;
-}
-
-.banner{
-    margin: 0px 10%;
-    padding-left: 15px;
+    align-items: center;
+    opacity: 0.99;
 }
 
 .contenedor-banner h2{
-    padding-top: 130px;
-    font-size: 20px;
+    font-size: 28px;
+    font-weight: 400;
     font-family: 'Open Sans',sans-serif;
     text-transform: uppercase;
     color: #fff;
 }
 
-@media(min-width:1441px){
-    .contenedor-banner{
-        position: relative;
-        top: 0px;
-    }
-    .div-banner{
-        position: relative;
-        top: -62px;
-    }
+.paginacion{
+    font-size: 18px !important;
 }
 
-@media (max-width: 768px) {
-    .contenedor-banner h2{display: none;}
-    .contenedor-banner{
-        height: 200px;
-    }
+.contenedor-banner .container{
+    display: flex;
+    justify-content: space-between;
 }

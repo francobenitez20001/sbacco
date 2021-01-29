@@ -4,6 +4,7 @@ import Mapa from '../../componentes/Mapa/Mapa';
 import LoaderFullWidth from '../../componentes/Loader/LoaderFullWidth';
 import { connect } from "react-redux";
 import * as nosotrosActions from '../../actions/nosotrosActions';
+import Footer from '../../componentes/Footer/Footer'
 import './Nosotros.css';
 
 const Nosotros = (props) => {
@@ -22,7 +23,7 @@ const Nosotros = (props) => {
         (props.loading || !props.info)?<LoaderFullWidth/>:
         <Fragment>
             <SliderGeneral seccion="Nosotros"/>
-            <div className="container-nosotros animated fadeIn fast mt-4">
+            <div className="container animated fadeIn fast mt-4">
                 <div className="row">
                     <div className="col-12 col-md-6">
                         <p id="tituloPropiedadesSeccionNosotros">Quiénes sómos</p>
@@ -36,6 +37,7 @@ const Nosotros = (props) => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </Fragment>
     );
 }

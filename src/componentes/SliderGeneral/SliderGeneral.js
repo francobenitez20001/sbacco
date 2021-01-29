@@ -3,10 +3,14 @@ import './SliderGeneral.css';
 
 const SliderGeneral = ({seccion}) => {
     return (
-        <div className="animated fadeIn fast div-banner">
-            <div className="col-12 contenedor-banner">
-                <div className="banner">
-                    <div className="row ">
+        <div className="animated fadeIn fast contenedor-banner">
+            <div className="container">
+                <h2>Angela Sbacco propiedades</h2>
+                <h2 className="paginacion">{seccion}</h2>
+            </div>
+            {/* <div className="contenedor-banner">
+                <div className="container">
+                    <div className="row">
                         <div className="col-6">
                             <h2>Angela Sbacco propiedades</h2>
                         </div>
@@ -15,7 +19,7 @@ const SliderGeneral = ({seccion}) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

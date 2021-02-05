@@ -4,13 +4,15 @@ import Mapa from '../../componentes/Mapa/Mapa';
 import LoaderFullWidth from '../../componentes/Loader/LoaderFullWidth';
 import { connect } from "react-redux";
 import * as nosotrosActions from '../../actions/nosotrosActions';
-import Footer from '../../componentes/Footer/Footer'
+import Footer from '../../componentes/Footer/Footer';
+import {scrollToTop} from '../../helpers/index';
 import './Nosotros.css';
 
 const Nosotros = (props) => {
 
     useEffect(() => {
         getData();
+        scrollToTop();
     }, [])
 
     const getData = ()=>{

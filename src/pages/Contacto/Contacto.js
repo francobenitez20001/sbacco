@@ -7,12 +7,14 @@ import Footer from '../../componentes/Footer/Footer';
 import Mapa from '../../componentes/Mapa/Mapa'
 import './Contacto.css';
 import CardInfoContacto from '../../componentes/CardInfoContacto';
+import {scrollToTop} from '../../helpers/index';
 
 const Contacto = (props) => {
     useEffect(() => {
         if(!props.info){
             props.getInfo();
         }
+        scrollToTop();
     }, [])
     return (
         (!props.info)?null:

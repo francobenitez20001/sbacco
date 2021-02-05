@@ -29,7 +29,7 @@ const Producto = ({propiedad}) => {
     let imagen = `${propiedad.header}`;
     let descripcion = propiedad.descripcion;
     if (descripcion.length>300) {
-        descripcion = propiedad.descripcion.substr(0,296)+'...';
+        descripcion = propiedad.descripcion.substr(0,200)+'...';
     }
     
     const verPropiedad = id=>{
@@ -45,7 +45,7 @@ const Producto = ({propiedad}) => {
                 </Avatar>
                 }
                 title={propiedad.partido}
-                subheader={propiedad.localidad}  
+                subheader={propiedad.barrio}  
             />
             {(propiedad.mostrarEstado=='no')?null:<span className="labelEstado">{propiedad.estado}</span>}
             <CardActionArea>

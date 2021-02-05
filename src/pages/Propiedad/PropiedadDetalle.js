@@ -9,7 +9,8 @@ import './PropiedadDetalle.css';
 import CarouselProductos from '../../componentes/CarouselProductos';
 import CardDescripcion from '../../componentes/CardDescripcionPropiedad/cardDescripcion';
 import CardServicios from '../../componentes/CardDescripcionPropiedad/cardServicios';
-import Footer  from '../../componentes/Footer/Footer'
+import Footer  from '../../componentes/Footer/Footer';
+import {scrollToTop} from '../../helpers/index';
 
 const PropiedadDetalle = (props) => {
     // console.log(id);
@@ -17,6 +18,7 @@ const PropiedadDetalle = (props) => {
     
     useEffect(() => {
         props.getPropiedad(id);
+        scrollToTop();
     }, [])
 
     const handleClickImagenIndividual = event =>{

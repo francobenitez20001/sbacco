@@ -1,7 +1,7 @@
 .contenedor-banner{
     height:250px;
-    background-image: url('https://images.unsplash.com/photo-1592201533860-87499b95a239?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-    background-position: bottom;
+    background-image: url('https://images.unsplash.com/photo-1529161898721-2928ca74afee?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTN8fGhvdXNlfGVufDB8fDB8YmxhY2s%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+    background-position: center;
     display: flex;
     background-size: cover;
     align-items: center;

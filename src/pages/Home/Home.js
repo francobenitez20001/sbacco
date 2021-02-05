@@ -7,11 +7,11 @@ import * as ubicacionesActions from '../../actions/ubicacionesActions.js';
 import * as operacionesActions from '../../actions/operacionesActions.js';
 import Slider from '../../componentes/Slider/Slider';
 import Filtro from '../../componentes/Filtro/Filtro';
-import FormContacto from '../../componentes/FormContacto/FormContacto';
 import Mapa from '../../componentes/Mapa/Mapa';
 import LoaderFullWidth from '../../componentes/Loader/LoaderFullWidth';
 import Footer from '../../componentes/Footer/Footer';
 import Propiedades from '../../componentes/Propiedades';
+import {scrollToTop} from '../../helpers/index';
 
 const {getCategorias} = categoriasActions;
 const {getOperaciones} = operacionesActions;
@@ -25,13 +25,14 @@ const Home = (props) => {
     const {ubicaciones} = props.ubicacionesReducer;
 
     useEffect(() => {
+        scrollToTop();
         if(categorias.length==0){
             props.getCategorias();
         }
         if(operaciones.length==0){
             props.getOperaciones();
         }
-        if(propiedades.length==0){
+        if(propiedades.length==0 || propiedades.length>5){
             props.getPropiedades();
         }
         if(ubicaciones.length==0){

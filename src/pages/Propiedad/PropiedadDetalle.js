@@ -57,7 +57,7 @@ const PropiedadDetalle = (props) => {
                         </div>
                     </div>
                 </div>
-                <FormContacto titulo="Consultar por esta propiedad"/>
+                <FormContacto titulo="Consultar por esta propiedad" propiedadDetalle={window.location.href}/>
             </div>
 
             <div className="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

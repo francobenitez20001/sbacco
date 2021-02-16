@@ -72,7 +72,7 @@ export const filtrarPropiedades = (params,rangoPrecio)=>async (dispatch)=>{
         type:LOADING
     });
     try {
-        let query = `${API}/filtrar_todo/${params.idLocalidad}/${params.idCategoria}/${params.idOperacion}/${params.precio}/${params.moneda}`;
+        let query = `${API}/filtrar_todo/${params.idLocalidad}/${params.idBarrio}/${params.idCategoria}/${params.idOperacion}/${params.precio}/${params.moneda}`;
         if(rangoPrecio){
             query += `?minPrecio=${rangoPrecio.minPrecio}&maxPrecio=${rangoPrecio.maxPrecio}`
         }

@@ -18,7 +18,7 @@ const CardServicios = ({propiedad}) => {
                     U$S {propiedad.precio}
                 </Typography>
                 <Typography variant="body2" component="div" className="text-justify descripcionCasa">
-                    <p className="tituloCaracteristica">Superficie Terreno:</p>
+                    <p className="tituloCaracteristica">Superficie cubierta:</p>
                     <span className="itemSuperficie" style={{textTransform:'uppercase'}}><b>{propiedad.s_terreno} metros cuadrados</b></span>
                     <br/><br/>
                     <p className="tituloCaracteristica">Superficie Total:</p>

@@ -69,8 +69,13 @@ const Producto = ({propiedad}) => {
                         Ver Más
                     </Button>
                 </Link>
-                <span size="small" color="primary" id="txtDimension">
-                    {propiedad.s_terreno} Metros Cuadrados
+                <span>
+                    <span size="small" color="primary" id="txtDimension" className="d-block">
+                        Sup. cubierta: <b>{propiedad.s_terreno} m2.</b>
+                    </span>
+                    <span size="small" color="primary" id="txtDimension">
+                        Sup. total: <b>{propiedad.s_total || '0'} {(propiedad.u_medida=='hectareas')?'Hec.':'m2.'}</b>
+                    </span>
                 </span>
             </CardActions>
         </Card>

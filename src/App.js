@@ -12,7 +12,7 @@ import Contacto from "./pages/Contacto/Contacto";
 import PropiedadDetalle from './pages/Propiedad/PropiedadDetalle'
 
 import Layout from './componentes/Layout';
-import NotFound from './componentes/NotFound/NotFound';
+import NotFound from './pages/NotFound';
 
 
 function App() {

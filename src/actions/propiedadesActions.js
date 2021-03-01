@@ -54,7 +54,7 @@ export const getPropiedad = (id)=>async(dispatch)=>{
     try {
         const reqPropiedad = await fetch(`${API}/detallar_inmueble_id/${id}`);
         const dataPropiedad = await reqPropiedad.json();
-        if(dataPropiedad.length<1) return dispatch({type:ERROR,payload:'No existe propiedad'});
+        if(dataPropiedad.data.length<1) return dispatch({type:ERROR,payload:'No existe propiedad'});
         return dispatch({
             type:VER_PROPIEDAD,
             payload:dataPropiedad

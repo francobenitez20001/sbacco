@@ -71,7 +71,7 @@ const Producto = ({propiedad}) => {
                 </Link>
                 <span>
                     <span size="small" color="primary" id="txtDimension" className="d-block">
-                        Sup. cubierta: <b>{propiedad.s_terreno} m2.</b>
+                        Sup. cubierta: <b>{propiedad.s_cubierta} m2.</b>
                     </span>
                     <span size="small" color="primary" id="txtDimension">
                         Sup. total: <b>{propiedad.s_total || '0'} {(propiedad.u_medida=='hectareas')?'Hec.':'m2.'}</b>

@@ -16,7 +16,7 @@ const Footer = (props) => {
                 <div className="container-fluid">
                     <div className="row align-items-center">
                         <div className="col-12 col-md-4 mt-1">
-                            <img src="logo.png" alt="logo" className="logo-footer img-fluid"/>
+                            <img src="/logo.png" alt="logo" className="logo-footer img-fluid"/>
                         </div>
                         <div className="col-12 col-md-4 text-center">
                             <i className="fa fa-phone-alt icon-footer material-icons mt-3"></i>

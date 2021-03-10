@@ -1,14 +1,23 @@
 .contenedor-banner{
     height:250px;
-    background-image: url('https://images.unsplash.com/photo-1529161898721-2928ca74afee?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTN8fGhvdXNlfGVufDB8fDB8YmxhY2s%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+    background-image: url('https://images.unsplash.com/photo-1593604340846-4fbe9763a8f3?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=934&q=80');
     background-position: center;
-    display: flex;
     background-size: cover;
-    align-items: center;
-    opacity: 0.99;
+    position: relative;
 }
 
-.contenedor-banner h2{
+.contenedor-banner:before {
+	content:'';
+	position: absolute;
+    top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0,0,0,0.6);
+    color: white;
+}
+
+.info-contenedor h2{
     font-size: 28px;
     font-weight: 400;
     font-family: 'Open Sans',sans-serif;
@@ -20,16 +29,21 @@
     font-size: 18px !important;
 }
 
-.contenedor-banner .container{
+.info-contenedor{
     display: flex;
     justify-content: space-between;
+    z-index: 2000;
+    position: absolute;
+    top: 23%;
+    width: 100%;
 }
 
 @media(max-width:768px){
-    .contenedor-banner{
+    .info-contenedor{
+        top: 16%;
         height: 160px;
     }
-    .contenedor-banner h2{
+    .info-contenedor h2{
         font-size: 15px;
     }
     .paginacion{font-size: 13px !important;}

@@ -73,7 +73,7 @@ const Header = (props) => {
             <nav className="navbar sticky-top navbar-expand-lg">
                 <div className="container">
                     <Link className="navbar-brand logo" to="/">
-                        <img src="http://104.197.241.81/imagenes/logo.png" alt="logo"/>
+                        <img src="/logo.png" alt="logo"/>
                     </Link>
                     <i onClick={toggleMenu} className="fas fa-bars" id="botonMenu"></i>
 

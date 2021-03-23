@@ -25,42 +25,46 @@ const CardServicios = ({propiedad}) => {
                     <span className="itemSuperficie" style={{textTransform:'uppercase'}}><b>{propiedad.s_total} {propiedad.u_medida}</b></span>
                     <br/><br/>
                     <p className="tituloCaracteristica">Servicios:</p>
-                    <span className="text-muted">Agua: 
-                            <b>
-                            {(propiedad.agua) ? propiedad.agua : 'No registrado'}
-                        </b>
-                    </span>
-                    <br/>
-                    <span className="text-muted">Luz: 
-                            <b>
-                            {(propiedad.luz) ? propiedad.luz : 'No registrado'}
-                        </b>
-                    </span>
-                    <br/>
-                    <span className="text-muted">Calefacción: 
-                            <b>
-                            {(propiedad.calefaccion) ? propiedad.calefaccion : 'No registrado'}
-                        </b>
-                    </span>
-                    <br/>
-                    <span className="text-muted">Gas: 
-                            <b>
-                            {(propiedad.gas) ? propiedad.gas : 'No registrado'}
-                        </b>
-                    </span>
-                    <br/>
-                    <span className="text-muted">Internet: 
-                            <b>
-                            {(propiedad.internet) ? propiedad.internet : 'No registrado'}
-                        </b>
-                    </span>
-                    <br/>
-                    <span className="text-muted">Telefono: 
-                            <b>
-                            {(propiedad.telefono) ? propiedad.telefono : 'No registrado'}
-                        </b>
-                    </span>
-                    <br/>
+                    {(propiedad.idCategoria === 2)?null: 
+                        <>
+                            <span className="text-muted">Agua: 
+                                    <b>
+                                    {(propiedad.agua) ? propiedad.agua : 'No registrado'}
+                                </b>
+                            </span>
+                            <br/>
+                            <span className="text-muted">Luz: 
+                                    <b>
+                                    {(propiedad.luz) ? propiedad.luz : 'No registrado'}
+                                </b>
+                            </span>
+                            <br/>
+                            <span className="text-muted">Calefacción: 
+                                    <b>
+                                    {(propiedad.calefaccion) ? propiedad.calefaccion : 'No registrado'}
+                                </b>
+                            </span>
+                            <br/>
+                            <span className="text-muted">Gas: 
+                                    <b>
+                                    {(propiedad.gas) ? propiedad.gas : 'No registrado'}
+                                </b>
+                            </span>
+                            <br/>
+                            <span className="text-muted">Internet: 
+                                    <b>
+                                    {(propiedad.internet) ? propiedad.internet : 'No registrado'}
+                                </b>
+                            </span>
+                            <br/>
+                            <span className="text-muted">Telefono: 
+                                    <b>
+                                    {(propiedad.telefono) ? propiedad.telefono : 'No registrado'}
+                                </b>
+                            </span>
+                            <br/>
+                        </>
+                    }
                     {(propiedad.idCategoria==3)?null:
                     <>
                         <span className="text-muted">Dormitorios: <b>{propiedad.dormitorios}</b></span>

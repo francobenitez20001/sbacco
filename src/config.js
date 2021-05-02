@@ -1,2 +1,2 @@
-const API = 'http://localhost:3001/api';
+const API = process.env.REACT_APP_BACKEND_URL;
 export {API};

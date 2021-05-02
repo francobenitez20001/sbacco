@@ -10,7 +10,7 @@ export const getBarrios = ()=>async(dispatch)=>{
         const dataBarrios = await reqBarrios.json();
         return dispatch({
             type:OBTENER_BARRIOS,
-            payload:dataBarrios.data
+            payload:dataBarrios.barrios
         })
     } catch (error) {
         dispatch({

@@ -6,11 +6,11 @@ export const getUbicaciones = ()=>async(dispatch)=>{
         type:LOADING
     });
     try {
-        const reqUbicaciones = await fetch(`${API}/ubicaciones`);
+        const reqUbicaciones = await fetch(`${API}/localidades`);
         const dataUbicaciones = await reqUbicaciones.json();
         return dispatch({
             type:OBTENER_UBICACIONES,
-            payload:dataUbicaciones.data
+            payload:dataUbicaciones.localidades
         })
     } catch (error) {
         dispatch({

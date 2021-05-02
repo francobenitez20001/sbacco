@@ -6,11 +6,11 @@ export const getPropiedades = (desde=0,limit=6)=>async(dispatch)=>{
         type:LOADING
     });
     try {
-        const reqPropiedades = await fetch(`${API}/listar_inmuebles/${limit}/normal?desde=${desde}`);
+        const reqPropiedades = await fetch(`${API}/inmuebles?cantidad=${limit}&desde=${desde}&order=normal`);
         const dataPropiedades = await reqPropiedades.json();
         return dispatch({
             type:OBTENER_PROPIEDADES,
-            payload:dataPropiedades.data
+            payload:dataPropiedades.inmuebles
         })
     } catch (error) {
         dispatch({
@@ -25,15 +25,15 @@ export const getMorePropiedades = (rangoProductos,prevProductos)=>async (dispatc
         type:LOADING_MAS
     });
     try {
-        let url = `${API}/listar_inmuebles/${rangoProductos.limite}/normal?desde=${rangoProductos.desde}`;
+        let url = `${API}/inmuebles?cantidad=${rangoProductos.limite}&order=normal&desde=${rangoProductos.desde}`;
         return fetch(url).then(res=>res.json()).then(data=>{
-            if(data.data.length==0){
+            if(data.inmuebles.length==0){
                 return dispatch({
                     type:ERROR_MAS_PROPIEDADES,
                     payload:'No se encontraron mas propiedades'
                 })
             }
-            let updateproductos = [...prevProductos,...data.data];
+            let updateproductos = [...prevProductos,...data.inmuebles];
             dispatch({
                 type:OBTENER_PROPIEDADES,
                 payload:updateproductos
@@ -52,9 +52,9 @@ export const getPropiedad = (id)=>async(dispatch)=>{
         type:LOADING
     });
     try {
-        const reqPropiedad = await fetch(`${API}/detallar_inmueble_id/${id}`);
+        const reqPropiedad = await fetch(`${API}/inmuebles/${id}`);
         const dataPropiedad = await reqPropiedad.json();
-        if(dataPropiedad.data.length<1) return dispatch({type:ERROR,payload:'No existe propiedad'});
+        if(dataPropiedad.inmueble.length==0) return dispatch({type:ERROR,payload:'No existe propiedad'});
         return dispatch({
             type:VER_PROPIEDAD,
             payload:dataPropiedad
@@ -72,21 +72,22 @@ export const filtrarPropiedades = (params,rangoPrecio)=>async (dispatch)=>{
         type:LOADING
     });
     try {
-        let query = `${API}/filtrar_todo/${params.idLocalidad}/${params.idBarrio}/${params.idCategoria}/${params.idOperacion}/${params.precio}/${params.moneda}`;
+        let query = `${API}/inmuebles/operaciones/filtrar?idLocalidad=${params.idLocalidad}&idBarrio=${params.idBarrio}&idCategoria=${params.idCategoria}&idOperacion=${params.idOperacion}&order=${params.precio}&moneda=${params.moneda}`;
         if(rangoPrecio){
-            query += `?minPrecio=${rangoPrecio.minPrecio}&maxPrecio=${rangoPrecio.maxPrecio}`
+            query += `&minPrecio=${rangoPrecio.minPrecio}&maxPrecio=${rangoPrecio.maxPrecio}`
         }
+        query += `&cantidad=6&desde=0`;
         const reqPropiedad = await fetch(query);
         const dataPropiedad = await reqPropiedad.json();
-        if(!dataPropiedad.status){
+        if(!dataPropiedad.ok){
             return dispatch({
                 type:ERROR,
-                payload:dataPropiedad.info.code
+                payload:dataPropiedad
             })
         }
         return dispatch({
             type:OBTENER_PROPIEDADES,
-            payload:dataPropiedad.data
+            payload:dataPropiedad.inmuebles
         })
     } catch (error) {
         dispatch({

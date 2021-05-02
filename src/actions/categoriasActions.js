@@ -10,7 +10,7 @@ export const getCategorias = ()=>async(dispatch)=>{
         const dataCategorias = await reqCategorias.json();
         return dispatch({
             type:OBTENER_CATEGORIAS,
-            payload:dataCategorias.data
+            payload:dataCategorias.categorias
         })
     } catch (error) {
         dispatch({

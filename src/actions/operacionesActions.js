@@ -10,7 +10,7 @@ export const getOperaciones = ()=>async(dispatch)=>{
         const dataOperaciones = await reqOperaciones.json();
         return dispatch({
             type:OBTENER_OPERACIONES,
-            payload:dataOperaciones.data
+            payload:dataOperaciones.operaciones
         })
     } catch (error) {
         dispatch({

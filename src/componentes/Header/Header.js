@@ -66,6 +66,9 @@ const Header = (props) => {
                             <a target="blank" style={{color:'white'}} href={props.info.instagram}>
                                 <i className="icon-social-menu fab fa-instagram"></i>
                             </a>
+                            <a target="blank" style={{color:'white'}} href={props.info.instagram}>
+                                <i className="icon-social-menu fab fa-twitter"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -87,6 +90,9 @@ const Header = (props) => {
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/propiedades">Propiedades</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/tasaciones">Tasaciones</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/contacto">Contacto</Link>

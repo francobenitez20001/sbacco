@@ -30,3 +30,14 @@ export const filtrarBarriosPorIdLocalidad = idLocalidad=>(dispatch,getState)=>{
         })
     }
 }
+
+export const filtrarBarriosPorLocalidad = localidad=>(dispatch,getState)=>{
+    let {barrios} = getState().barriosReducer;
+    if(barrios.length>0){
+        let barriosFiltrados = barrios.filter(barrio=>barrio.localidad == localidad);
+        return dispatch({
+            type:FILTRAR,
+            payload:barriosFiltrados
+        })
+    }
+}

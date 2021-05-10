@@ -10,6 +10,7 @@ import Nosotros from './pages/Nosotros/Nosotros';
 import PropiedadesPage from './pages/Propiedades/Propiedades.js';
 import Contacto from "./pages/Contacto/Contacto";
 import PropiedadDetalle from './pages/Propiedad/PropiedadDetalle'
+import Tasaciones from './pages/Tasaciones/index';
 
 import Layout from './componentes/Layout';
 import NotFound from './pages/NotFound';
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="/propiedades" component={PropiedadesPage}/>
           <Route exact path="/contacto" component={Contacto}/>
           <Route exact path="/propiedad/:id" component={PropiedadDetalle}/>
+          <Route exact path="/tasaciones" component={Tasaciones}/>
           <Route component={NotFound}/>
         </Switch>
       </Layout>

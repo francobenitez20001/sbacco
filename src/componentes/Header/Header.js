@@ -66,7 +66,7 @@ const Header = (props) => {
                             <a target="blank" style={{color:'white'}} href={props.info.instagram}>
                                 <i className="icon-social-menu fab fa-instagram"></i>
                             </a>
-                            <a target="blank" style={{color:'white'}} href={props.info.instagram}>
+                            <a target="blank" style={{color:'white'}} href={props.info.twitter}>
                                 <i className="icon-social-menu fab fa-twitter"></i>
                             </a>
                         </div>

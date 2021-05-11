@@ -11,6 +11,7 @@ import * as barriosActions from '../../actions/barriosActions';
 import * as categoriasActions from '../../actions/categoriasActions';
 import * as operacionesActions from '../../actions/operacionesActions';
 import Swal from 'sweetalert2';
+import { API } from '../../config';
 
 const {getUbicaciones} = ubicacionesActions;
 const {getBarrios,filtrarBarriosPorLocalidad} = barriosActions;
@@ -24,13 +25,14 @@ const FormTasacion = (props) => {
         nombre:'',
         email:'',
         telefono:'',
-        idLocalidad:'',
-        idBarrio:'',
-        idCategoria:'',
-        idOperacion:'',
+        localidad:'',
+        barrio:'',
+        categoria:'',
+        operacion:'',
         mensaje:''
     });
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         getResources();
@@ -52,7 +54,7 @@ const FormTasacion = (props) => {
     }
 
     const handleChange = e=>{
-        if(e.target.name == 'idLocalidad'){
+        if(e.target.name == 'localidad'){
             filtrarBarriosPorLocalidad(e.target.value);
         }
         setFormValues({
@@ -61,7 +63,7 @@ const FormTasacion = (props) => {
         })
     }
 
-    const handleSubmit = e=>{
+    const handleSubmit = async e=>{
         e.preventDefault();
         for (const key in formValues) {
             if (Object.hasOwnProperty.call(formValues, key)) {
@@ -72,11 +74,36 @@ const FormTasacion = (props) => {
                 }
             }
         }
-        console.log(formValues);
+        const requestConfig = {
+            method:'POST',
+            body:JSON.stringify(formValues),
+            headers:{'Content-Type':'application/json'}
+        }
+        try {
+            setLoading(true);
+            const reqTasacion = await fetch(`${API}/tasaciones`,requestConfig);
+            setLoading(false);
+            if(reqTasacion.status !== 200){
+                Swal.fire('Ups...','Ha ocurrido un error, inténtelo más tarde','error');
+                return;
+            }
+            Swal.fire('Listo','Se ha enviado tu pedido de tasacion, en breve nos comunicaremos con vos','success').then(()=>setFormValues({
+                nombre:'',
+                email:'',
+                telefono:'',
+                localidad:'',
+                barrio:'',
+                categoria:'',
+                operacion:'',
+                mensaje:'' 
+            }));
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
-        !ubicaciones.length || !barrios.length || !categorias.length || !operaciones.length ? <LoaderFullWidth/> :
+        !ubicaciones.length || !barrios.length || !categorias.length || !operaciones.length || loading ? <LoaderFullWidth/> :
         <form className="example-form animated fadeIn fast" onSubmit={handleSubmit}>
             <div className="row">
                 <div className="col-12 col-md-6 my-2 __withBorderLeft">
@@ -137,8 +164,8 @@ const FormTasacion = (props) => {
                         id="demo-simple-select"
                         onChange={handleChange}
                         className={`w-100`}
-                        name="idLocalidad"
-                        defaultValue={formValues.idLocalidad}
+                        name="localidad"
+                        defaultValue={formValues.localidad}
                         style={{ margin: 8 }}
                     >
                         <MenuItem value="">Seleccione una localidad</MenuItem>
@@ -154,8 +181,8 @@ const FormTasacion = (props) => {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        defaultValue={formValues.idBarrio}
-                        name="idBarrio"
+                        defaultValue={formValues.barrio}
+                        name="barrio"
                         onChange={handleChange}
                         className={`w-100`}
                         style={{ margin: 8 }}
@@ -173,11 +200,11 @@ const FormTasacion = (props) => {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={formValues.localidad}
+                        value={formValues.categoria}
                         onChange={handleChange}
                         className={`w-100`}
-                        name="idCategoria"
-                        defaultValue={formValues.idCategoria}
+                        name="categoria"
+                        defaultValue={formValues.categoria}
                         style={{ margin: 8 }}
                     >
                         <MenuItem value="">Seleccione un tipo de propiedad</MenuItem>
@@ -193,8 +220,8 @@ const FormTasacion = (props) => {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        name="idOperacion"
-                        defaultValue={formValues.idOperacion}
+                        name="operacion"
+                        defaultValue={formValues.operacion}
                         onChange={handleChange}
                         className={`w-100`}
                         style={{ margin: 8 }}

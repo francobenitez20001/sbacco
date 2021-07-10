@@ -72,6 +72,8 @@ const CardServicios = ({propiedad}) => {
                         <span className="text-muted">Cochera: <b>{propiedad.cochera}</b></span>
                         <br/>
                         <span className="text-muted">Pileta: <b>{propiedad.pileta}</b></span>
+                        <br/>
+                        <span className="text-muted">Baños: <b>{propiedad.baños}</b></span>
                     </>
                     }
                 </Typography>

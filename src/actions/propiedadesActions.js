@@ -6,7 +6,7 @@ export const getPropiedades = (desde=0,limit=6)=>async(dispatch)=>{
         type:LOADING
     });
     try {
-        const reqPropiedades = await fetch(`${API}/inmuebles?cantidad=${limit}&desde=${desde}&order=normal`);
+        const reqPropiedades = await fetch(`${API}/inmuebles?cantidad=${limit}&desde=${desde}&order=normal`,{method:'POST'});
         const dataPropiedades = await reqPropiedades.json();
         return dispatch({
             type:OBTENER_PROPIEDADES,
@@ -26,7 +26,7 @@ export const getMorePropiedades = (rangoProductos,prevProductos)=>async (dispatc
     });
     try {
         let url = `${API}/inmuebles?cantidad=${rangoProductos.limite}&order=normal&desde=${rangoProductos.desde}`;
-        return fetch(url).then(res=>res.json()).then(data=>{
+        return fetch(url,{method:'POST'}).then(res=>res.json()).then(data=>{
             if(data.inmuebles.length==0){
                 return dispatch({
                     type:ERROR_MAS_PROPIEDADES,
@@ -72,13 +72,15 @@ export const filtrarPropiedades = (params,rangoPrecio)=>async (dispatch)=>{
         type:LOADING
     });
     try {
-        let query = `${API}/inmuebles/operaciones/filtrar?idLocalidad=${params.idLocalidad}&idBarrio=${params.idBarrio}&idCategoria=${params.idCategoria}&idOperacion=${params.idOperacion}&order=${params.precio}&moneda=${params.moneda}`;
-        if(rangoPrecio){
-            query += `&minPrecio=${rangoPrecio.minPrecio}&maxPrecio=${rangoPrecio.maxPrecio}`
-        }
-        query += `&cantidad=6&desde=0`;
-        const reqPropiedad = await fetch(query);
-        const dataPropiedad = await reqPropiedad.json();
+        // let query = `${API}/inmuebles/operaciones/filtrar?idLocalidad=${params.idLocalidad}&idBarrio=${params.idBarrio}&idCategoria=${params.idCategoria}&idOperacion=${params.idOperacion}&order=${params.precio}&moneda=${params.moneda}`;
+        // if(rangoPrecio){
+        //     query += `&minPrecio=${rangoPrecio.minPrecio}&maxPrecio=${rangoPrecio.maxPrecio}`
+        // }
+        // query += `&cantidad=6&desde=0`;
+        //const reqPropiedad = await fetch(query);
+        //const dataPropiedad = await reqPropiedad.json();
+        const reqPropiedades = await fetch(`${API}/inmuebles?cantidad=${limit}&desde=${desde}&order=normal`,{method:'POST'});
+        const dataPropiedad = await reqPropiedades.json();
         if(!dataPropiedad.ok){
             return dispatch({
                 type:ERROR,

@@ -1,6 +1,10 @@
 export const OBTENER_PROPIEDADES = 'propiedades_obtener_todas';
+export const OBTENER_MAS_PROPIEDADES = 'propiedades_obtener_mas';
 export const ERROR = 'propiedades_error';
 export const ERROR_MAS_PROPIEDADES = 'propiedades_error_mas_propiedades';
 export const LOADING = 'propiedades_loading';
 export const LOADING_MAS =  'propiedades_loading_mas';
 export const VER_PROPIEDAD = 'propiedades_ver_una';
+export const APLICAR_FILTRO = 'propiedades_aplicar_filtro';
+export const RESTABLECER_FILTROS = 'propiedades_restablecer_filtros';
+export const UPDATE_PAGINATION = 'propiedades_update_pagination';

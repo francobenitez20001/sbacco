@@ -19,12 +19,13 @@ import * as barriosActions from '../../actions/barriosActions';
 import Loader from '../Loader/Loader';
 import Swal from 'sweetalert2';
 import './Filtro.css';
+import { useHistory } from 'react-router-dom';
 
 const {getCategorias} = categoriasActions;
 const {getOperaciones} = operacionesActions;
 const {getUbicaciones} = ubicacionesActions;
 const {getBarrios,filtrarBarriosPorIdLocalidad} = barriosActions;
-const {filtrarPropiedades} = propiedadesActions;
+const {aplicarFiltros} = propiedadesActions;
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -36,89 +37,78 @@ const useStyles = makeStyles((theme) => ({
 }));
   
 const Filtro = (props) => {
+
     const classes = useStyles();
     const [check, setCheck] = useState(false);
     const [error, setError] = useState(false);
-    useEffect(() => {
-        const getData = ()=>{
-            const {operaciones} = props.operacionesReducer;
-            const {categorias} = props.categoriasReducer;
-            const {ubicaciones} = props.ubicacionesReducer;
-            const {barrios} = props.barriosReducer;
-            if(categorias.length===0){
-                props.getCategorias();
-            }
-            if(operaciones.length===0){
-                props.getOperaciones();
-            }
-            if(ubicaciones.length===0){
-                props.getUbicaciones();
-            }
-            if(barrios.length==0){
-                props.getBarrios();
-            }
-        }
-        getData();
-    }, [])
-
     const [busqueda, setBusqueda] = useState({
         idLocalidad:'',
         idCategoria:'',
         idOperacion:'',
         idBarrio:'',
-        precio:'',
+        order:'',
         moneda:'',
-        valor:0
+        valor:0,
+        minPrecio:null,
+        maxPrecio:null
     });
+    //state para habilitar el form cuando este toda la data cargada
+    const [loadAllData, setLoadAllData] = useState(false);
+    let history = useHistory();
 
-    const [rango, setRango] = useState({
-        minPrecio:0,
-        maxPrecio:0
-    });
+    useEffect(() => {
+        getData();
+    }, []);
+    
+    const getData = async () => {
+        const {operaciones} = props.operacionesReducer;
+        const {categorias} = props.categoriasReducer;
+        const {ubicaciones} = props.ubicacionesReducer;
+        const {barrios} = props.barriosReducer;
+        if(categorias.length===0){
+            await props.getCategorias();
+        }
+        if(operaciones.length===0){
+            await props.getOperaciones();
+        }
+        if(ubicaciones.length===0){
+            await props.getUbicaciones();
+        }
+        if(barrios.length==0){
+            await props.getBarrios();
+        }
+        setLoadAllData(true);
+    }
+
   
     const handleChange = event => {
         setBusqueda({
             ...busqueda,
             [event.target.name]:event.target.value
         })
-        if(event.target.name == 'idLocalidad'){
+        if(event.target.name === 'idLocalidad'){
             props.filtrarBarriosPorIdLocalidad(event.target.value);
         }
     };
 
     const handleSubmit = event=>{
         event.preventDefault();
-        if (busqueda.idCategoria === '' || busqueda.idOperacion === '' || busqueda.idBarrio === '' || busqueda.precio === '' || busqueda.moneda === '') {
+        if (busqueda.idCategoria === '' || busqueda.idOperacion === '') {
             setError(true);
             return;
         }
         setError(false);
-        if(check){
-            props.filtrarPropiedades(busqueda,rango)
-        }else{
-            props.filtrarPropiedades(busqueda,null);
-        }
+        props.aplicarFiltros(busqueda);
+        return history.push('/propiedades')
     }
 
-    const handleChangeCheck = event=>{
-        if(check){
-            return setCheck(false);
-        }
-        return setCheck(true);
-    };
-
-    const handleChangeCheckValues = event=>{
-        setRango({
-            ...rango,
-            [event.target.name]:event.target.value
-        })
-    }
     const {operaciones} = props.operacionesReducer;
     const {categorias} = props.categoriasReducer;
     const {ubicaciones} = props.ubicacionesReducer;
     const {barriosFiltrados} = props.barriosReducer;
 
     return (
+        !loadAllData ? <Loader/> :
         <div className="jumbotron">
             {(error) ? <Error mensaje="Completa todos los campos"/> : null}
             {(props.propiedadesReducer.loading)?<LoaderFullWidth/>:null}
@@ -203,8 +193,8 @@ const Filtro = (props) => {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                name="precio"
-                                value={busqueda.precio}
+                                name="order"
+                                value={busqueda.order}
                                 onChange={handleChange}
                             >
                                 <MenuItem value="high">Desde el mayor al menor</MenuItem>
@@ -234,8 +224,8 @@ const Filtro = (props) => {
                                         label="Min. valor"
                                         type="number" 
                                         name="minPrecio"
-                                        value={rango.minPrecio}
-                                        onChange={handleChangeCheckValues} />
+                                        value={busqueda.minPrecio}
+                                        onChange={handleChange} />
                         </FormControl>}
                     </div>
                     <div className="col-12 col-sm-3 my-2">
@@ -245,13 +235,13 @@ const Filtro = (props) => {
                                         label="Max. valor"
                                         type="number" 
                                         name="maxPrecio"
-                                        value={rango.maxPrecio}
-                                        onChange={handleChangeCheckValues} />
+                                        value={busqueda.maxPrecio}
+                                        onChange={handleChange} />
                         </FormControl>}
                     </div>
                     <div className="col-12 col-sm-3 pt-3">
                         <FormControlLabel
-                            control={<Checkbox checked={check} onChange={handleChangeCheck} name="habilitarRango" />}
+                            control={<Checkbox checked={check} onChange={()=>setCheck(!check)} name="habilitarRango" />}
                             label="Habilitar rango de precio"
                         />
                     </div>
@@ -277,7 +267,7 @@ const mapDispatchToProps = {
     getUbicaciones,
     getBarrios,
     filtrarBarriosPorIdLocalidad,
-    filtrarPropiedades
+    aplicarFiltros
 };
  
 export default connect(mapStateToProps,mapDispatchToProps)(Filtro);

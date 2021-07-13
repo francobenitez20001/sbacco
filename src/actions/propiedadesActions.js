@@ -1,12 +1,13 @@
-import {LOADING,ERROR,OBTENER_PROPIEDADES,VER_PROPIEDAD,LOADING_MAS, ERROR_MAS_PROPIEDADES} from '../types/propiedadesTypes';
+import {LOADING,ERROR,OBTENER_PROPIEDADES,VER_PROPIEDAD,LOADING_MAS, ERROR_MAS_PROPIEDADES, UPDATE_PAGINATION, OBTENER_MAS_PROPIEDADES, APLICAR_FILTRO} from '../types/propiedadesTypes';
 import {API} from '../config';
 
-export const getPropiedades = (desde=0,limit=6)=>async(dispatch)=>{
+export const getPropiedades = ()=>async(dispatch,getState)=>{
     dispatch({
         type:LOADING
     });
     try {
-        const reqPropiedades = await fetch(`${API}/inmuebles?cantidad=${limit}&desde=${desde}&order=normal`);
+        const {desde,cantidad,filtros:{order}} = getState().propiedadesReducer;
+        const reqPropiedades = await fetch(`${API}/inmuebles?cantidad=${cantidad}&desde=${desde}&order=${order}`);
         const dataPropiedades = await reqPropiedades.json();
         return dispatch({
             type:OBTENER_PROPIEDADES,
@@ -20,25 +21,37 @@ export const getPropiedades = (desde=0,limit=6)=>async(dispatch)=>{
     }
 }
 
-export const getMorePropiedades = (rangoProductos,prevProductos)=>async (dispatch)=>{
+export const getMorePropiedades = ()=>async (dispatch,getState)=>{
     dispatch({
         type:LOADING_MAS
     });
     try {
-        let url = `${API}/inmuebles?cantidad=${rangoProductos.limite}&order=normal&desde=${rangoProductos.desde}`;
-        return fetch(url).then(res=>res.json()).then(data=>{
-            if(data.inmuebles.length==0){
-                return dispatch({
-                    type:ERROR_MAS_PROPIEDADES,
-                    payload:'No se encontraron mas propiedades'
-                })
-            }
-            let updateproductos = [...prevProductos,...data.inmuebles];
-            dispatch({
-                type:OBTENER_PROPIEDADES,
-                payload:updateproductos
+        const {filtrando,filtros,desde,cantidad} = getState().propiedadesReducer;
+
+        let req;
+        if(filtrando){
+            let url = `${API}/inmuebles/operaciones/filtrar?cantidad=${cantidad}&order=${filtros.order}&desde=${desde}`;
+            req = await fetch(url,{
+                method:'POST',
+                body:JSON.stringify(filtros)
             });
-        })
+        }else{
+            let url = `${API}/inmuebles?cantidad=${cantidad}&order=${filtros.order}&desde=${desde}`;
+            req = await fetch(url);
+        }
+
+        const data = await req.json();
+
+        if(data.inmuebles.length === 0){
+            return dispatch({
+                type:ERROR_MAS_PROPIEDADES,
+                payload:'No se encontraron mas propiedades'
+            })
+        }
+        return dispatch({
+            type:OBTENER_MAS_PROPIEDADES,
+            payload:data.inmuebles
+        });
     } catch (error) {
         dispatch({
             type:ERROR,
@@ -67,20 +80,18 @@ export const getPropiedad = (id)=>async(dispatch)=>{
     }
 }
 
-export const filtrarPropiedades = (params,rangoPrecio)=>async (dispatch)=>{
+export const filtrarPropiedades = ()=>async (dispatch,getState)=>{
     dispatch({
         type:LOADING
     });
     try {
-        // let query = `${API}/inmuebles/operaciones/filtrar?idLocalidad=${params.idLocalidad}&idBarrio=${params.idBarrio}&idCategoria=${params.idCategoria}&idOperacion=${params.idOperacion}&order=${params.precio}&moneda=${params.moneda}`;
-        // if(rangoPrecio){
-        //     query += `&minPrecio=${rangoPrecio.minPrecio}&maxPrecio=${rangoPrecio.maxPrecio}`
-        // }
-        // query += `&cantidad=6&desde=0`;
-        //const reqPropiedad = await fetch(query);
-        //const dataPropiedad = await reqPropiedad.json();
-        const reqPropiedades = await fetch(`${API}/inmuebles?cantidad=6&desde=0&order=normal`);
-        const dataPropiedad = await reqPropiedades.json();
+        const {filtros,desde,cantidad} = getState().propiedadesReducer;
+        let query = `${API}/inmuebles/operaciones/filtrar?order=${filtros.order}&desde${desde}&cantidad=${cantidad}`;
+        const reqPropiedad = await fetch(query,{
+            method:'POST',
+            body:JSON.stringify(filtros)
+        });
+        const dataPropiedad = await reqPropiedad.json();
         if(!dataPropiedad.ok){
             return dispatch({
                 type:ERROR,
@@ -97,4 +108,17 @@ export const filtrarPropiedades = (params,rangoPrecio)=>async (dispatch)=>{
             payload:error.message
         })
     }
+}
+
+export const aplicarFiltros = filtros => dispatch => {
+    return dispatch({
+        type:APLICAR_FILTRO,
+        payload:filtros
+    })
+}
+
+export const updatePagination = () => (dispatch) =>{
+    return dispatch({
+        type:UPDATE_PAGINATION
+    })
 }

@@ -1,9 +1,20 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import FormTasacion from '../../componentes/FormTasacion/formTasacion';
 import SliderGeneral from '../../componentes/SliderGeneral/SliderGeneral';
 import Footer from '../../componentes/Footer/Footer';
-const Tasaciones = () => {
+import {connect} from 'react-redux';
+import LoaderFullWidth from '../../componentes/Loader/LoaderFullWidth';
+import { scrollToTop } from '../../helpers/index';
+
+const Tasaciones = (props) => {
+    const {info} = props;
+    
+    useEffect(() => {
+        scrollToTop();
+    }, []);
+    
     return (
+        !info ? <LoaderFullWidth/> :
         <Fragment>
             <SliderGeneral seccion="Tasaciones"/>
             <div className="container py-4">
@@ -22,5 +33,7 @@ const Tasaciones = () => {
         </Fragment>
     );
 }
- 
-export default Tasaciones;
+
+const mapStateToProps = ({contactoReducer}) => contactoReducer; 
+
+export default connect(mapStateToProps,{})(Tasaciones);

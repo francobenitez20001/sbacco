@@ -22,7 +22,7 @@ const Nosotros = (props) => {
     }
 
     return (
-        (props.loading || !props.info)?<LoaderFullWidth/>:
+        !props.info ?<LoaderFullWidth/> :
         <Fragment>
             <SliderGeneral seccion="Nosotros"/>
             <div className="container animated fadeIn fast mt-4">

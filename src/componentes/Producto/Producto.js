@@ -37,7 +37,7 @@ const Producto = ({propiedad}) => {
     }
     
     return (
-        <Card className={classes.root} onClick={()=>verPropiedad(propiedad.id)}>
+        <Card className={classes.root + 'animated fadeIn fast'} onClick={()=>verPropiedad(propiedad.id)}>
             <CardHeader
                 avatar={
                 <Avatar aria-label="recipe" className="avatar">
@@ -47,7 +47,7 @@ const Producto = ({propiedad}) => {
                 title={propiedad.localidad}
                 subheader={propiedad.barrio}  
             />
-            {(propiedad.mostrarEstado=='no')?null:<span className="labelEstado">{propiedad.estado}</span>}
+            {(propiedad.mostrarEstado==='no')?null:<span className="labelEstado">{propiedad.estado}</span>}
             <CardActionArea>
                 <CardMedia
                 className={classes.media}
@@ -74,7 +74,7 @@ const Producto = ({propiedad}) => {
                         Sup. cubierta: <b>{propiedad.s_cubierta} m2.</b>
                     </span>
                     <span size="small" color="primary" id="txtDimension">
-                        Sup. total: <b>{propiedad.s_total || '0'} {(propiedad.u_medida=='hectareas')?'Hec.':'m2.'}</b>
+                        Sup. total: <b>{propiedad.s_total || '0'} {(propiedad.u_medida==='hectareas')?'Hec.':'m2.'}</b>
                     </span>
                 </span>
             </CardActions>

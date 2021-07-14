@@ -1,4 +1,4 @@
-import React,{Fragment,useEffect} from 'react';
+import React,{Fragment,useEffect, useState} from 'react';
 import { useParams } from "react-router-dom";
 import SliderGeneral from '../../componentes/SliderGeneral/SliderGeneral';
 import FormContacto from '../../componentes/FormContacto/FormContacto';
@@ -13,22 +13,33 @@ import Footer  from '../../componentes/Footer/Footer';
 import {scrollToTop} from '../../helpers/index';
 import './PropiedadDetalle.css';
 
+const {getPropiedad} = propiedadesActions;
+
 const PropiedadDetalle = (props) => {
     // console.log(id);
     let { id } = useParams();
+    const [loadAllData, setLoadAllData] = useState(false);
+    const {
+        propiedad:{data:propiedad,imagenes},
+        getPropiedad
+    } = props;
     
     useEffect(() => {
-        props.getPropiedad(id);
         scrollToTop();
-    }, [])
+        getData();
+    }, []);
+    
+    const getData = async () => {
+        await getPropiedad(id);
+        setLoadAllData(true);
+    }
 
     const handleClickImagenIndividual = event =>{
         document.getElementsByName('img-modal')[0].src = event.target.src
     }
 
-    const {data:propiedad,imagenes} = props.propiedad;
     return (
-        (props.loading)?<LoaderFullWidth/>:
+        !loadAllData ? <LoaderFullWidth/> :
         <Fragment>
             {(props.error && !props.loading)?<NotFoundContent/>:null}
             <SliderGeneral seccion="Propiedad en detalle"/>
@@ -77,7 +88,11 @@ const PropiedadDetalle = (props) => {
         </Fragment>
     );
 }
- 
-const mapStateToProps = ({propiedadesReducer})=>propiedadesReducer;
 
-export default connect(mapStateToProps,propiedadesActions)(PropiedadDetalle);
+const mapStateToProps = ({propiedadesReducer})=>propiedadesReducer
+
+const mapDispatchToProps = {
+    getPropiedad
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(PropiedadDetalle);

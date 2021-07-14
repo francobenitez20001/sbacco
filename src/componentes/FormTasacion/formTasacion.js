@@ -104,7 +104,7 @@ const FormTasacion = (props) => {
 
     return (
         !ubicaciones.length || !barrios.length || !categorias.length || !operaciones.length || loading ? <LoaderFullWidth/> :
-        <form className="example-form animated fadeIn fast" onSubmit={handleSubmit}>
+        <form className="example-form animated fadeIn" onSubmit={handleSubmit}>
             <div className="row">
                 <div className="col-12 col-md-6 my-2 __withBorderLeft">
                     <TextField

@@ -1,23 +1,24 @@
-import React,{Fragment, useEffect} from 'react';
+import React,{ Fragment, useEffect } from 'react';
 import SliderGeneral from '../../componentes/SliderGeneral/SliderGeneral';
 import FormContacto from '../../componentes/FormContacto/FormContacto';
 import {connect} from 'react-redux';
-import * as contactoActions from '../../actions/contactoActions';
 import Footer from '../../componentes/Footer/Footer';
 import Mapa from '../../componentes/Mapa/Mapa'
-import './Contacto.css';
 import CardInfoContacto from '../../componentes/CardInfoContacto';
 import {scrollToTop} from '../../helpers/index';
+import LoaderFullWidth from '../../componentes/Loader/LoaderFullWidth';
+import './Contacto.css';
 
 const Contacto = (props) => {
+
+    const {info} = props;
+
     useEffect(() => {
-        if(!props.info){
-            props.getInfo();
-        }
         scrollToTop();
-    }, [])
+    }, []);
+
     return (
-        (!props.info)?null:
+        !info ? <LoaderFullWidth/> :
         <Fragment>
             <SliderGeneral seccion="Contacto"/>
             <div className="container py-3">
@@ -40,4 +41,4 @@ const Contacto = (props) => {
  
 const mapStateToProps = ({contactoReducer})=>contactoReducer;
  
-export default connect(mapStateToProps,contactoActions)(Contacto);
+export default connect(mapStateToProps,{})(Contacto);

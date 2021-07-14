@@ -2,21 +2,3 @@
     font-family: AgencyFb;
     src: url("../../AgencyFBCondensed.ttf") format("truetype");
 }
-.carousel-caption{
-    position: absolute;
-    right: 15%;
-    bottom: 45%;
-    left: 15%;
-    z-index: 10;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    color: #fff;
-    text-align: center;
-}
-
-.carousel-item img{max-height: 95vh;}
-
-.carousel-caption h2{font-size: 72px;}
-.carousel-caption h3{font-size: 32px;}
-.carousel-caption h2,h3{font-family: 'AgencyFb',sans-serif;text-transform: uppercase;}
-

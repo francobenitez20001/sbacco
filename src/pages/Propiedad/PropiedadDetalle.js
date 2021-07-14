@@ -47,13 +47,13 @@ const PropiedadDetalle = (props) => {
             <>
                 <div className="container my-5">
                     <div className="row">
-                        <div className="col-12 col-md-10">
+                        <div className="col-12 col-md-12">
                             <CarouselProductos imagenes={imagenes}/>
                         </div>
-                        <div className="col-12 col-md-2 muestraImagenes">
-                            {imagenes.map(img=>(
-                                <img key={img.id} onClick={handleClickImagenIndividual} data-toggle="modal" data-target=".bd-example-modal-lg" src={`${img.nombre}`} className="img-fluid mb-2" alt="casa"/>
-                            ))}
+                        <div className="col-12 col-md-2 muestraImagenes d-none">
+                            {/* {imagenes.map(img=>(
+                                <LazyLoadImage key={img.id} onClick={handleClickImagenIndividual} data-toggle="modal" data-target=".bd-example-modal-lg" src={`${img.nombre}`} className="img-fluid mb-2" alt={img.nombre}/>
+                            ))} */}
                         </div>
                     </div>
 

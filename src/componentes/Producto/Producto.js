@@ -6,13 +6,12 @@ import Avatar from '@material-ui/core/Avatar';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import { red } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { Link } from 'react-router-dom';
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import './Producto.css';
 
 const useStyles = makeStyles({
@@ -60,13 +59,15 @@ const Producto = ({propiedad}) => {
             />
             {(propiedad.mostrarEstado==='no')?null:<span className="labelEstado">{propiedad.estado}</span>}
             <CardActionArea>
-                <img
-                    className={classes.media + `${load ? '' : 'd-none'}`}
+                <LazyLoadImage
+                    height={140}
+                    width="100%"
                     src={imagen}
                     alt={descripcion}
-                    onLoad={handleLoad}
+                    style={{objectFit:'cover'}}
+                    effect="blur"
                 />
-                { !load ? <div className={classes.progress}><CircularProgress color="secondary" /></div> : null }
+                {/* { !load ? <div className={classes.progress}><CircularProgress color="secondary" /></div> : null } */}
                 <CardContent>   
                     <Typography gutterBottom variant="h5" component="h2">
                         

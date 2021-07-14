@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import './Footer.css';
 
 const Footer = (props) => {
-    const {info:{telefonoPrincipal,direccion}} = props;
+    const {info} = props;
     return (
+        !info ? null :
         <div className="contenedor-footer">
             <div className="footer">
                 <div className="container-fluid">
@@ -14,11 +15,11 @@ const Footer = (props) => {
                         </div>
                         <div className="col-12 col-md-4 text-center">
                             <i className="fa fa-phone-alt icon-footer material-icons mt-3"></i>
-                            <p className="info-footer mt-2">{telefonoPrincipal}</p>
+                            <p className="info-footer mt-2">{info.telefonoPrincipal}</p>
                         </div>
                         <div className="col-12 col-md-4 text-center">
                             <i className="fas fa-map-marker-alt material-icons icon-footer mt-3"></i>
-                            <p className="info-footer mt-2">{direccion}</p>
+                            <p className="info-footer mt-2">{info.direccion}</p>
                         </div>
                     </div>
                 </div>

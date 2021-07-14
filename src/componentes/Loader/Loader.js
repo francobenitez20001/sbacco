@@ -6,9 +6,8 @@ import './Loader.css';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    '& > * + *': {
-      marginLeft: theme.spacing(2),
-    },
+    alignItems:'center',
+    justifyContent:'center'
   },
 }));
 

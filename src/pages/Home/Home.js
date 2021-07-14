@@ -1,7 +1,5 @@
-import React,{useEffect} from 'react';
-import '../../App.css';
+import React,{useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import * as propiedadesActions from '../../actions/propiedadesActions.js';
 import * as categoriasActions from '../../actions/categoriasActions.js';
 import * as ubicacionesActions from '../../actions/ubicacionesActions.js';
 import * as operacionesActions from '../../actions/operacionesActions.js';
@@ -12,42 +10,42 @@ import LoaderFullWidth from '../../componentes/Loader/LoaderFullWidth';
 import Footer from '../../componentes/Footer/Footer';
 import Propiedades from '../../componentes/Propiedades';
 import {scrollToTop} from '../../helpers/index';
+import '../../App.css';
 
 const {getCategorias} = categoriasActions;
 const {getOperaciones} = operacionesActions;
-const {getPropiedades} = propiedadesActions;
 const {getUbicaciones} = ubicacionesActions;
 
 const Home = (props) => {
-    const {categorias} = props.categoriasReducer;
-    const {operaciones} = props.operacionesReducer;
-    const {propiedades} = props.propiedadesReducer;
-    const {ubicaciones} = props.ubicacionesReducer;
+    const [loadAllData, setLoadAllData] = useState(false);
+    const {categoriasReducer:{categorias},operacionesReducer:{operaciones},ubicacionesReducer:{ubicaciones},getCategorias,getOperaciones,getUbicaciones} = props;
 
     useEffect(() => {
         scrollToTop();
-        if(categorias.length==0){
-            props.getCategorias();
+        getData();
+    }, []);
+    
+    const getData = async () => {
+        if(!categorias.length){
+            await getCategorias();
         }
-        if(operaciones.length==0){
-            props.getOperaciones();
+        if(!operaciones.length){
+            await getOperaciones();
         }
-        if(propiedades.length==0 || propiedades.length>5){
-            props.getPropiedades();
+        if(!ubicaciones.length){
+            await getUbicaciones();
         }
-        if(ubicaciones.length==0){
-            props.getUbicaciones();
-        }
-    }, [])
+        setLoadAllData(true);
+    }
 
     return (
-        (categorias.length==0 || operaciones.length==0 || ubicaciones.length == 0)?<LoaderFullWidth/>:
+        !loadAllData ? <LoaderFullWidth/> :
         <div className="App">
             <Slider/>
             <Filtro/>
             <div className="container">
                 <h2 id="tituloPropiedadesSeccion" className="mb-4">Últimas <span>Propiedades</span></h2>
-                <Propiedades/>
+                <Propiedades btnVerMas={false}/>
             </div>
             <hr/>
             <div className="container">
@@ -58,14 +56,13 @@ const Home = (props) => {
     );
 }
 
-const mapStateToProps = ({categoriasReducer,operacionesReducer,propiedadesReducer,ubicacionesReducer})=>{
-    return {categoriasReducer,operacionesReducer,propiedadesReducer,ubicacionesReducer}
+const mapStateToProps = ({categoriasReducer,operacionesReducer,ubicacionesReducer})=>{
+    return {categoriasReducer,operacionesReducer,ubicacionesReducer}
 };
 
 const mapDispatchToProps = {
     getCategorias,
     getOperaciones,
-    getPropiedades,
     getUbicaciones
 }
 

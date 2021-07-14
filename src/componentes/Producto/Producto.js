@@ -44,7 +44,7 @@ const Producto = ({propiedad}) => {
                     <i className="fas fa-map-marker-alt"></i>
                 </Avatar>
                 }
-                title={propiedad.partido}
+                title={propiedad.localidad}
                 subheader={propiedad.barrio}  
             />
             {(propiedad.mostrarEstado=='no')?null:<span className="labelEstado">{propiedad.estado}</span>}

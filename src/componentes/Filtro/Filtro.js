@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import Error from '../Error/Error'
-import LoaderFullWidth from '../Loader/LoaderFullWidth';
+import Error from '../Error/Error';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -17,9 +16,9 @@ import * as categoriasActions from '../../actions/categoriasActions';
 import * as propiedadesActions from '../../actions/propiedadesActions';
 import * as barriosActions from '../../actions/barriosActions';
 import Loader from '../Loader/Loader';
-import Swal from 'sweetalert2';
-import './Filtro.css';
 import { useHistory } from 'react-router-dom';
+import { scrollToTop } from '../../helpers';
+import './Filtro.css';
 
 const {getCategorias} = categoriasActions;
 const {getOperaciones} = operacionesActions;
@@ -42,18 +41,17 @@ const Filtro = (props) => {
     const [check, setCheck] = useState(false);
     const [error, setError] = useState(false);
     const [busqueda, setBusqueda] = useState({
-        idLocalidad:'',
-        idCategoria:'',
-        idOperacion:'',
-        idBarrio:'',
-        order:'',
-        moneda:'',
+        idLocalidad:"",
+        idCategoria:"",
+        idOperacion:"",
+        idBarrio:"",
+        order:"",
+        moneda:"",
         valor:0,
-        minPrecio:null,
-        maxPrecio:null
+        minPrecio:"",
+        maxPrecio:""
     });
     //state para habilitar el form cuando este toda la data cargada
-    const [loadAllData, setLoadAllData] = useState(false);
     let history = useHistory();
 
     useEffect(() => {
@@ -77,7 +75,6 @@ const Filtro = (props) => {
         if(barrios.length==0){
             await props.getBarrios();
         }
-        setLoadAllData(true);
     }
 
   
@@ -99,6 +96,9 @@ const Filtro = (props) => {
         }
         setError(false);
         props.aplicarFiltros(busqueda);
+        if(history.location.pathname === '/propiedades'){
+            return scrollToTop();
+        }
         return history.push('/propiedades')
     }
 
@@ -108,18 +108,8 @@ const Filtro = (props) => {
     const {barriosFiltrados} = props.barriosReducer;
 
     return (
-        !loadAllData ? <Loader/> :
         <div className="jumbotron">
             {(error) ? <Error mensaje="Completa todos los campos"/> : null}
-            {(props.propiedadesReducer.loading)?<LoaderFullWidth/>:null}
-            {(props.propiedadesReducer.error)?
-                Swal.fire(
-                    'Ups..',
-                    props.propiedadesReducer.error,
-                    'error'
-                )
-            :null}
-            {(operaciones.length===0 || categorias.length===0 || ubicaciones.length===0)?<Loader/>:
             <form className="col-12" onSubmit={handleSubmit}>
                 <div className="row">
                     <div className="col-12 col-sm-3 inputFiltro">
@@ -252,7 +242,6 @@ const Filtro = (props) => {
                     </div>
                 </div>
             </form>
-            }
         </div>
     );
 }

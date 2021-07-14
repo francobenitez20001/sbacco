@@ -14,7 +14,7 @@ const PropiedadesPage = (props) => {
         <Fragment>
             <SliderGeneral seccion="Propiedades"/>
             <div className="container my-3">
-                <Propiedades location={props.location}/>
+                <Propiedades btnVerMas={true}/>
             </div>
             <Filtro/>
             <Footer/>

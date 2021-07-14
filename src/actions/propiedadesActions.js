@@ -1,4 +1,4 @@
-import {LOADING,ERROR,OBTENER_PROPIEDADES,VER_PROPIEDAD,LOADING_MAS, ERROR_MAS_PROPIEDADES, UPDATE_PAGINATION, OBTENER_MAS_PROPIEDADES, APLICAR_FILTRO} from '../types/propiedadesTypes';
+import {LOADING,ERROR,OBTENER_PROPIEDADES,VER_PROPIEDAD,LOADING_MAS, ERROR_MAS_PROPIEDADES, UPDATE_PAGINATION, OBTENER_MAS_PROPIEDADES, APLICAR_FILTRO, RESTABLECER_FILTROS} from '../types/propiedadesTypes';
 import {API} from '../config';
 
 export const getPropiedades = ()=>async(dispatch,getState)=>{
@@ -32,8 +32,9 @@ export const getMorePropiedades = ()=>async (dispatch,getState)=>{
         if(filtrando){
             let url = `${API}/inmuebles/operaciones/filtrar?cantidad=${cantidad}&order=${filtros.order}&desde=${desde}`;
             req = await fetch(url,{
+                headers:{'Content-Type':'application/json'},
                 method:'POST',
-                body:JSON.stringify(filtros)
+                body:JSON.stringify({filtros})
             });
         }else{
             let url = `${API}/inmuebles?cantidad=${cantidad}&order=${filtros.order}&desde=${desde}`;
@@ -86,10 +87,11 @@ export const filtrarPropiedades = ()=>async (dispatch,getState)=>{
     });
     try {
         const {filtros,desde,cantidad} = getState().propiedadesReducer;
-        let query = `${API}/inmuebles/operaciones/filtrar?order=${filtros.order}&desde${desde}&cantidad=${cantidad}`;
+        let query = `${API}/inmuebles/operaciones/filtrar?order=${filtros.order}&desde=${desde}&cantidad=${cantidad}`;
         const reqPropiedad = await fetch(query,{
+            headers:{'Content-Type':'application/json'},
             method:'POST',
-            body:JSON.stringify(filtros)
+            body:JSON.stringify({filtros})
         });
         const dataPropiedad = await reqPropiedad.json();
         if(!dataPropiedad.ok){
@@ -120,5 +122,11 @@ export const aplicarFiltros = filtros => dispatch => {
 export const updatePagination = () => (dispatch) =>{
     return dispatch({
         type:UPDATE_PAGINATION
+    })
+}
+
+export const restablecerFiltros = () => dispatch => {
+    return dispatch({
+        type:RESTABLECER_FILTROS
     })
 }

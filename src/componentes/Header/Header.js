@@ -1,6 +1,5 @@
-import React,{Fragment,useState,useEffect} from 'react';
+import React,{Fragment, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import LoaderFullWidth from '../Loader/LoaderFullWidth';
 import {connect} from 'react-redux';
 import * as contactoActions from '../../actions/contactoActions';
 import './Header.css';
@@ -36,18 +35,13 @@ if(window){
 
 const Header = (props) => {
 
+    const {info,getInfo} = props;
     useEffect(() => {
-        getData();
+        getInfo();
     }, [])
 
-    const getData = ()=>{
-        if(!props.info){
-            props.getInfo();
-        }
-    }
-    
     return (
-        (!props.info)?<LoaderFullWidth/>:
+        !info ? null :
         <Fragment>
             <div className="menu-contacto-info d-xs-none d-sm-none d-md-block">
                 <div className="container">
@@ -55,18 +49,18 @@ const Header = (props) => {
                         <div className="col-9">
                             <span className="info-menu-contacto mr-4">Oficina central en Parada Robles</span>
                             <i className=" ml-4 mr-2 fa fa-phone-alt"></i>
-                            <span className="info-menu-contacto valores-contacto">{props.info.telefonoPrincipal}</span>
+                            <span className="info-menu-contacto valores-contacto">{info.telefonoPrincipal}</span>
                             <i className=" ml-4 mr-2 fab fa-whatsapp"></i>
-                            <span className="info-menu-contacto valores-contacto">{props.info.whatsapp}</span>
+                            <span className="info-menu-contacto valores-contacto">{info.whatsapp}</span>
                         </div>
                         <div className="col-3 text-center redes">
-                            <a target="blank" style={{color:'white'}} href={props.info.facebook}>
+                            <a target="blank" style={{color:'white'}} href={info.facebook}>
                                 <i className="icon-social-menu fab fa-facebook-f"></i>
                             </a>
-                            <a target="blank" style={{color:'white'}} href={props.info.instagram}>
+                            <a target="blank" style={{color:'white'}} href={info.instagram}>
                                 <i className="icon-social-menu fab fa-instagram"></i>
                             </a>
-                            <a target="blank" style={{color:'white'}} href={props.info.twitter}>
+                            <a target="blank" style={{color:'white'}} href={info.twitter}>
                                 <i className="icon-social-menu fab fa-twitter"></i>
                             </a>
                         </div>

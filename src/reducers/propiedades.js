@@ -59,7 +59,7 @@ export default (state=INITIAL_STATE,action)=>{
                     minPrecio:action.payload.minPrecio !== '' ? action.payload.minPrecio : null,
                     maxPrecio:action.payload.maxPrecio !== '' ? action.payload.maxPrecio : null,
                     moneda:action.payload.moneda !== '' ? action.payload.moneda : null,
-                    order:action.payload.order !== '' ? action.payload.order : null
+                    order:action.payload.order !== '' ? action.payload.order : 'normal'
                 }
             }
         case RESTABLECER_FILTROS:

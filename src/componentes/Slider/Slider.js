@@ -69,7 +69,7 @@ const Slider = () => {
                 {imagenes.map((step, index) => (
                 <div key={step.id}>
                     {Math.abs(activeStep - index) <= 2 ? (
-                    <LazyLoadImage effect="blur" src={step.nombre} alt={step.nombre} className={classes.img}/>
+                    <LazyLoadImage effect="blur" src={step.nombre} alt={step.nombre} className={classes.img} width="100%"/>
                     ) : null}
                 </div>
                 ))}
